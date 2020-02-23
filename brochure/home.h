@@ -17,6 +17,8 @@ public:
 private slots:
     void on_capability_clicked();
 
+    void on_testimonial_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -18,6 +18,8 @@ public:
 private slots:
     void on_home_clicked();
 
+    void on_testimonial_clicked();
+
 private:
     Ui::capability *ui;
 };
