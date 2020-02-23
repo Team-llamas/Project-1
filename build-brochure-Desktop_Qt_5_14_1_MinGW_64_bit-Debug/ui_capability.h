@@ -10,143 +10,124 @@
 #define UI_CAPABILITY_H
 
 #include <QtCore/QVariant>
-#include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QDialog>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
-#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextBrowser>
-#include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
 
-class Ui_MainWindow
+class Ui_capability
 {
 public:
-    QWidget *centralwidget;
-    QLabel *bannerPic;
-    QLabel *label_2;
-    QTextBrowser *textBrowser;
-    QLabel *scanPic;
-    QTextBrowser *textBrowser_2;
-    QLabel *label;
     QTextBrowser *textBrowser_3;
+    QTextBrowser *textBrowser;
+    QPushButton *capability_2;
+    QLabel *header;
+    QLabel *bannerPic;
+    QPushButton *home;
+    QTextBrowser *textBrowser_2;
+    QPushButton *maint;
+    QLabel *label;
+    QLabel *label_2;
     QLabel *label_3;
-    QMenuBar *menubar;
-    QMenu *menuHome;
-    QMenu *menuMaintanance_Plans;
-    QMenu *menuCapabilities;
-    QStatusBar *statusbar;
 
-    void setupUi(QMainWindow *MainWindow)
+    void setupUi(QDialog *capability)
     {
-        if (MainWindow->objectName().isEmpty())
-            MainWindow->setObjectName(QString::fromUtf8("MainWindow"));
-        MainWindow->resize(837, 686);
-        MainWindow->setAnimated(false);
-        centralwidget = new QWidget(MainWindow);
-        centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        bannerPic = new QLabel(centralwidget);
+        if (capability->objectName().isEmpty())
+            capability->setObjectName(QString::fromUtf8("capability"));
+        capability->resize(903, 802);
+        textBrowser_3 = new QTextBrowser(capability);
+        textBrowser_3->setObjectName(QString::fromUtf8("textBrowser_3"));
+        textBrowser_3->setGeometry(QRect(570, 430, 256, 131));
+        textBrowser = new QTextBrowser(capability);
+        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
+        textBrowser->setGeometry(QRect(10, 430, 256, 141));
+        capability_2 = new QPushButton(capability);
+        capability_2->setObjectName(QString::fromUtf8("capability_2"));
+        capability_2->setEnabled(false);
+        capability_2->setGeometry(QRect(150, 10, 91, 31));
+        header = new QLabel(capability);
+        header->setObjectName(QString::fromUtf8("header"));
+        header->setGeometry(QRect(10, 400, 211, 31));
+        QFont font;
+        font.setPointSize(12);
+        header->setFont(font);
+        bannerPic = new QLabel(capability);
         bannerPic->setObjectName(QString::fromUtf8("bannerPic"));
-        bannerPic->setGeometry(QRect(10, 0, 801, 341));
+        bannerPic->setGeometry(QRect(30, 50, 801, 341));
         bannerPic->setFocusPolicy(Qt::StrongFocus);
         bannerPic->setPixmap(QPixmap(QString::fromUtf8(":/pics/science-in-hd-1WBN-JKSmKI-unsplash.jpg")));
         bannerPic->setScaledContents(true);
         bannerPic->setMargin(0);
         bannerPic->setOpenExternalLinks(false);
-        label_2 = new QLabel(centralwidget);
-        label_2->setObjectName(QString::fromUtf8("label_2"));
-        label_2->setGeometry(QRect(0, 340, 211, 31));
-        textBrowser = new QTextBrowser(centralwidget);
-        textBrowser->setObjectName(QString::fromUtf8("textBrowser"));
-        textBrowser->setGeometry(QRect(0, 370, 256, 131));
-        scanPic = new QLabel(centralwidget);
-        scanPic->setObjectName(QString::fromUtf8("scanPic"));
-        scanPic->setGeometry(QRect(0, 480, 261, 141));
-        scanPic->setPixmap(QPixmap(QString::fromUtf8(":/pics/fatma-hatam-6-p_qnVa3zU-unsplash.jpg")));
-        scanPic->setScaledContents(true);
-        textBrowser_2 = new QTextBrowser(centralwidget);
+        home = new QPushButton(capability);
+        home->setObjectName(QString::fromUtf8("home"));
+        home->setEnabled(true);
+        home->setGeometry(QRect(30, 10, 91, 31));
+        textBrowser_2 = new QTextBrowser(capability);
         textBrowser_2->setObjectName(QString::fromUtf8("textBrowser_2"));
-        textBrowser_2->setGeometry(QRect(290, 370, 256, 151));
-        label = new QLabel(centralwidget);
+        textBrowser_2->setGeometry(QRect(290, 430, 256, 151));
+        maint = new QPushButton(capability);
+        maint->setObjectName(QString::fromUtf8("maint"));
+        maint->setGeometry(QRect(270, 10, 91, 31));
+        label = new QLabel(capability);
         label->setObjectName(QString::fromUtf8("label"));
-        label->setGeometry(QRect(290, 520, 261, 121));
-        label->setPixmap(QPixmap(QString::fromUtf8(":/pics/xtra-inc-bhXQcYqH4fc-unsplash.jpg")));
+        label->setGeometry(QRect(10, 580, 251, 221));
+        label->setPixmap(QPixmap(QString::fromUtf8(":/pics/fatma-hatam-6-p_qnVa3zU-unsplash.jpg")));
         label->setScaledContents(true);
-        textBrowser_3 = new QTextBrowser(centralwidget);
-        textBrowser_3->setObjectName(QString::fromUtf8("textBrowser_3"));
-        textBrowser_3->setGeometry(QRect(560, 370, 256, 131));
-        label_3 = new QLabel(centralwidget);
+        label_2 = new QLabel(capability);
+        label_2->setObjectName(QString::fromUtf8("label_2"));
+        label_2->setGeometry(QRect(290, 590, 251, 191));
+        label_2->setPixmap(QPixmap(QString::fromUtf8(":/pics/xtra-inc-bhXQcYqH4fc-unsplash.jpg")));
+        label_2->setScaledContents(true);
+        label_3 = new QLabel(capability);
         label_3->setObjectName(QString::fromUtf8("label_3"));
-        label_3->setGeometry(QRect(560, 480, 261, 151));
+        label_3->setGeometry(QRect(570, 570, 251, 221));
         label_3->setPixmap(QPixmap(QString::fromUtf8(":/pics/keri-liwi-SSXCiGKYQQE-unsplash.jpg")));
         label_3->setScaledContents(true);
-        MainWindow->setCentralWidget(centralwidget);
-        menubar = new QMenuBar(MainWindow);
-        menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setEnabled(true);
-        menubar->setGeometry(QRect(0, 0, 837, 21));
-        menuHome = new QMenu(menubar);
-        menuHome->setObjectName(QString::fromUtf8("menuHome"));
-        menuHome->setAutoFillBackground(false);
-        menuMaintanance_Plans = new QMenu(menubar);
-        menuMaintanance_Plans->setObjectName(QString::fromUtf8("menuMaintanance_Plans"));
-        menuCapabilities = new QMenu(menubar);
-        menuCapabilities->setObjectName(QString::fromUtf8("menuCapabilities"));
-        menuCapabilities->setFocusPolicy(Qt::StrongFocus);
-        MainWindow->setMenuBar(menubar);
-        statusbar = new QStatusBar(MainWindow);
-        statusbar->setObjectName(QString::fromUtf8("statusbar"));
-        QFont font;
-        font.setPointSize(12);
-        statusbar->setFont(font);
-        MainWindow->setStatusBar(statusbar);
 
-        menubar->addAction(menuHome->menuAction());
-        menubar->addAction(menuCapabilities->menuAction());
-        menubar->addAction(menuMaintanance_Plans->menuAction());
+        retranslateUi(capability);
 
-        retranslateUi(MainWindow);
-
-        QMetaObject::connectSlotsByName(MainWindow);
+        QMetaObject::connectSlotsByName(capability);
     } // setupUi
 
-    void retranslateUi(QMainWindow *MainWindow)
+    void retranslateUi(QDialog *capability)
     {
-        MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+        capability->setWindowTitle(QCoreApplication::translate("capability", "Dialog", nullptr));
+        textBrowser_3->setHtml(QCoreApplication::translate("capability", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Using the latest advances in wireless communication technology, your RoboDetector can be remotely controlled in a 5 km radius with 1-2 ms latency.</span></p></body></html>", nullptr));
+        textBrowser->setHtml(QCoreApplication::translate("capability", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">With state of the art LIDAR and deep wave emitters, the RoboDetector can scan depths up to 30 m below ground*.</span></p>\n"
+"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;\"><br /></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:9pt;\">*Tested on a paved concrete road in fair conditions.</span></p></body><"
+                        "/html>", nullptr));
+        capability_2->setText(QCoreApplication::translate("capability", "Capability", nullptr));
+        header->setText(QCoreApplication::translate("capability", "Customer Testimonials", nullptr));
         bannerPic->setText(QString());
-        label_2->setText(QCoreApplication::translate("MainWindow", "So What Can the RoboDetector 3000 Do?", nullptr));
-        textBrowser->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+        home->setText(QCoreApplication::translate("capability", "Home", nullptr));
+        textBrowser_2->setHtml(QCoreApplication::translate("capability", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
 "</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">With state-of-the-art LIDAR and deep penatration wave emitters, the RoboDetector</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">can scan depths up to 30m below ground*.</span></p>\n"
-"<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-size:12pt;\"><br /></p></body></html>", nullptr));
-        scanPic->setText(QString());
-        textBrowser_2->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Hybrid tract wheels combined with carbon fiber casing let's your RoboDetector travel across any kind of terrain imaginable. From dirt and gravel paths to the urban sprawl, your RoboDetector has you covered.</span></p></body></html>", nullptr));
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Hybrid track wheels combined with carbon fiber casing lets your RoboDetector travel across any terrain imaginable. From dirt and gravel paths to the urban sprawl, your RoboDetector has you covered.</span></p></body></html>", nullptr));
+        maint->setText(QCoreApplication::translate("capability", "Maintanence", nullptr));
         label->setText(QString());
-        textBrowser_3->setHtml(QCoreApplication::translate("MainWindow", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
-"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
-"p, li { white-space: pre-wrap; }\n"
-"</style></head><body style=\" font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;\">\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:12pt;\">Using the latest advances in wireless communications technology, your RoboDetector can be remotely controled up in a 5 km radius with 1-2 ms latency.</span></p></body></html>", nullptr));
+        label_2->setText(QString());
         label_3->setText(QString());
-        menuHome->setTitle(QCoreApplication::translate("MainWindow", "Home", nullptr));
-        menuMaintanance_Plans->setTitle(QCoreApplication::translate("MainWindow", "Maintanance Plans", nullptr));
-        menuCapabilities->setTitle(QCoreApplication::translate("MainWindow", "Capabilities", nullptr));
     } // retranslateUi
 
 };
 
 namespace Ui {
-    class MainWindow: public Ui_MainWindow {};
+    class capability: public Ui_capability {};
 } // namespace Ui
 
 QT_END_NAMESPACE

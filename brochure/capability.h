@@ -1,20 +1,25 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef CAPABILITY_H
+#define CAPABILITY_H
 
-#include <QMainWindow>
+#include <QDialog>
 
-QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
-QT_END_NAMESPACE
+namespace Ui {
+class capability;
+}
 
-class MainWindow : public QMainWindow
+class capability : public QDialog
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    explicit capability(QWidget *parent = nullptr);
+    ~capability();
+
+private slots:
+    void on_home_clicked();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::capability *ui;
 };
-#endif // MAINWINDOW_H
+
+#endif // CAPABILITY_H

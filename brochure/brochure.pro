@@ -17,13 +17,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     capability.cpp \
+    home.cpp \
     main.cpp
 
 HEADERS += \
-    capability.h
+    capability.h \
+    home.h
 
 FORMS += \
-    capability.ui
+    capability.ui \
+    home.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

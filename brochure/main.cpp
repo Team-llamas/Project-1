@@ -1,4 +1,4 @@
-#include "capability.h"
+#include "home.h"
 
 #include <QApplication>
 

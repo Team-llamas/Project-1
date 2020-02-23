@@ -1,15 +1,20 @@
 #include "capability.h"
-#include "ui_mainwindow.h"
+#include "home.h"
+#include "ui_capability.h"
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+capability::capability(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::capability)
 {
     ui->setupUi(this);
 }
 
-MainWindow::~MainWindow()
+capability::~capability()
 {
     delete ui;
 }
 
+void capability::on_home_clicked()
+{
+    this->done(0);
+}
