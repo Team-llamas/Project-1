@@ -1,4 +1,4 @@
-#include "Project1.h"
+#include "capability.h"
 
 #include <QApplication>
 
