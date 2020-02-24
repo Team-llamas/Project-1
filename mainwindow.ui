@@ -116,6 +116,19 @@
       <string>tempButton</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="addCustomerListButton">
+     <property name="geometry">
+      <rect>
+       <x>310</x>
+       <y>370</y>
+       <width>191</width>
+       <height>41</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Add To Customer Lists</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="infoFrame">
     <property name="geometry">

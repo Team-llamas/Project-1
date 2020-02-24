@@ -28,17 +28,25 @@ SOURCES += \
         mainwindow.cpp \
         capability.cpp \
 #        home.cpp \
-    home.cpp
+    home.cpp \
+    database.cpp \
+    customerinfotype.cpp \
+    inputcustomerdata.cpp
 
 HEADERS += \
         capability.h \
         mainwindow.h \
-    home.h
+    home.h \
+    customerinfotype.h \
+    utilities.h \
+    database.h \
+    inputcustomerdata.h
 
 FORMS += \
         mainwindow.ui \
         capability.ui \
         home.ui \
+    inputcustomerdata.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -47,3 +55,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 RESOURCES += \
     images.qrc
+
+DISTFILES += \
+    database.txt
