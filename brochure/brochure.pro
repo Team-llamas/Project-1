@@ -19,16 +19,19 @@ SOURCES += \
     capability.cpp \
     home.cpp \
     main.cpp \
+    maint.cpp \
     testimonial.cpp
 
 HEADERS += \
     capability.h \
     home.h \
+    maint.h \
     testimonial.h
 
 FORMS += \
     capability.ui \
     home.ui \
+    maint.ui \
     testimonial.ui
 
 # Default rules for deployment.
