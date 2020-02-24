@@ -25,10 +25,25 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+        capability.cpp \
+#        home.cpp \
+    home.cpp
 
 HEADERS += \
-        mainwindow.h
+        capability.h \
+        mainwindow.h \
+    home.h
 
 FORMS += \
-        mainwindow.ui
+        mainwindow.ui \
+        capability.ui \
+        home.ui \
+
+# Default rules for deployment.
+qnx: target.path = /tmp/$${TARGET}/bin
+else: unix:!android: target.path = /opt/$${TARGET}/bin
+!isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    images.qrc
