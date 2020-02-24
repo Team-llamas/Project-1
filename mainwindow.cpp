@@ -1,7 +1,8 @@
 #include "mainwindow.h"
+#include "capability.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+home::home(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -10,35 +11,63 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->infoFrame->setHidden(true);
 }
 
-MainWindow::~MainWindow()
+home::~home()
 {
     delete ui;
 }
 
-void MainWindow::on_textBrowser_anchorClicked(const QUrl &arg1)
+void home::on_textBrowser_anchorClicked(const QUrl &arg1)
 {
     ui->mainFrame->setHidden(true);
     ui->infoFrame->setHidden(false);
 }
 
-void MainWindow::on_textBrowser_destroyed()
+void home::on_capability_clicked()
 {
-
+    capability wind;
+    wind.setModal(true);
+    hide();
+    wind.exec();
+    show();
 }
 
-void MainWindow::on_infoFrame_destroyed(QObject *arg1)
-{
-
-}
-
-void MainWindow::on_pushButton_clicked()
+void home::on_detectingBombButton_clicked()
 {
     ui->mainFrame->setHidden(true);
     ui->infoFrame->setHidden(false);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
-void MainWindow::on_back_clicked()
+void home::on_back_clicked()
 {
     ui->mainFrame->setHidden(false);
     ui->infoFrame->setHidden(true);
+}
+
+void home::on_testimonial_clicked()
+{
+
+}
+
+void home::on_consumingBombButton_clicked()
+{
+    ui->mainFrame->setHidden(true);
+    ui->infoFrame->setHidden(false);
+    ui->stackedWidget->setCurrentIndex(1);
+}
+
+void home::on_reachingBombButton_clicked()
+{
+    ui->mainFrame->setHidden(true);
+    ui->infoFrame->setHidden(false);
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void home::on_tempButton_clicked()
+{
+    home wind;
+    wind.setModal(true);
+    hide();
+    wind.exec();
+    show();
 }

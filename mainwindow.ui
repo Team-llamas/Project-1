@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>469</width>
-    <height>505</height>
+    <width>612</width>
+    <height>516</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>30</x>
       <y>0</y>
-      <width>371</width>
-      <height>341</height>
+      <width>561</width>
+      <height>451</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -29,7 +29,7 @@
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
-    <widget class="QLabel" name="robot_pic">
+    <widget class="QLabel" name="robotPic">
      <property name="geometry">
       <rect>
        <x>20</x>
@@ -51,7 +51,7 @@
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QLabel" name="label">
+    <widget class="QLabel" name="title">
      <property name="geometry">
       <rect>
        <x>0</x>
@@ -64,25 +64,64 @@
       <string>Bomb Detecting Robot</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton">
+    <widget class="QPushButton" name="detectingBombButton">
      <property name="geometry">
       <rect>
-       <x>150</x>
-       <y>30</y>
+       <x>100</x>
+       <y>50</y>
        <width>231</width>
-       <height>61</height>
+       <height>21</height>
       </rect>
      </property>
      <property name="text">
       <string>Advance CV for detecting bombs</string>
      </property>
     </widget>
+    <widget class="QPushButton" name="consumingBombButton">
+     <property name="geometry">
+      <rect>
+       <x>120</x>
+       <y>110</y>
+       <width>271</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Safely detonating bomb by consuming</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="reachingBombButton">
+     <property name="geometry">
+      <rect>
+       <x>130</x>
+       <y>230</y>
+       <width>251</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Powerful legs get through obstacles</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="tempButton">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>370</y>
+       <width>231</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>tempButton</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QFrame" name="infoFrame">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>0</y>
+      <x>120</x>
+      <y>30</y>
       <width>461</width>
       <height>311</height>
      </rect>
@@ -97,20 +136,20 @@
      <property name="geometry">
       <rect>
        <x>20</x>
-       <y>0</y>
+       <y>10</y>
        <width>361</width>
-       <height>241</height>
+       <height>231</height>
       </rect>
      </property>
      <property name="currentIndex">
       <number>0</number>
      </property>
      <widget class="QWidget" name="page">
-      <widget class="QTextBrowser" name="textBrowser_2">
+      <widget class="QTextBrowser" name="cvDescription">
        <property name="geometry">
         <rect>
          <x>50</x>
-         <y>10</y>
+         <y>40</y>
          <width>256</width>
          <height>192</height>
         </rect>
@@ -123,8 +162,84 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The advance CV algorithm that the irobot uses is able to detect a disgused bomb where a human will see an ordinary object. The software also allows the irobot to detect the bomb up to a quarter mile away and is proven more effective than using bombs sniffing dogs.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
       </widget>
+      <widget class="QLabel" name="cvLabel">
+       <property name="geometry">
+        <rect>
+         <x>50</x>
+         <y>0</y>
+         <width>151</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Advance CV algorithm</string>
+       </property>
+      </widget>
      </widget>
-     <widget class="QWidget" name="page_2"/>
+     <widget class="QWidget" name="page_2">
+      <widget class="QTextBrowser" name="safeDetonationDescription">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>20</y>
+         <width>291</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;In the event that the Irobot is unable to difuse the bomb, it will enage a safe detonation protocal. In the protrocal the Irobot will eat the bomb whole, storing it a heavly armoured bomb chamber within the Irobot. Then it will proceed to walk to a point it determines that maxium the distance between the Irobot and all people in the area. In doing the bomb will be able to detonate with any damage to the nearby environment nor persons.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="safeDetonationLabel">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>-10</y>
+         <width>161</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Safe Detonation</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QWidget" name="page_3">
+      <widget class="QTextBrowser" name="legsDescription">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>40</y>
+         <width>256</width>
+         <height>192</height>
+        </rect>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Ubuntu'; font-size:11pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;The powerful legs of the Irobot allows it to kick down any door or wall, or other obstacle that prevent the Irobot from reaching the bomb. The legs also give the Irobot the ability to jump great hieghts to allow the Irobot to get to a bomb in a hard to reach place. You can rest assured that no matter where bomb might be hidden, the Irobot will get to it.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="legsLable">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>0</y>
+         <width>191</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Getting through obstacles</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QPushButton" name="back">
      <property name="geometry">
@@ -146,7 +261,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>469</width>
+     <width>612</width>
      <height>22</height>
     </rect>
    </property>

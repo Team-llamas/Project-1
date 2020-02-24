@@ -4,7 +4,7 @@
 #include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
-namespace Ui { class MainWindow; }
+namespace Ui { class home; }
 QT_END_NAMESPACE
 
 class home : public QMainWindow
@@ -18,20 +18,8 @@ private slots:
     void on_capability_clicked();
 
     void on_testimonial_clicked();
-private slots:
-    void on_textBrowser_anchorClicked(const QUrl &arg1);
-
-    void on_detectingBombButton_clicked();
-
-    void on_back_clicked();
-
-    void on_consumingBombButton_clicked();
-
-    void on_reachingBombButton_clicked();
-
-    void on_tempButton_clicked();
 
 private:
-    Ui::MainWindow *ui;
+    Ui::home *ui;
 };
 #endif // MAINWINDOW_H
