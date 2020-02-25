@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+
 namespace Ui {
 class MainWindow;
 }
@@ -14,6 +15,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
+private slots:
+    void on_radioButton_clicked();
+
+    void on_radioButton_toggled(bool checked);
 
 private:
     Ui::MainWindow *ui;

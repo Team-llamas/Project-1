@@ -8,7 +8,5 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    cout << "Hello World" << endl;
-
     return a.exec();
 }

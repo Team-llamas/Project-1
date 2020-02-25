@@ -12,3 +12,23 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
+void MainWindow::on_radioButton_clicked()
+{
+
+}
+
+void MainWindow::on_radioButton_toggled(bool checked)
+{
+    if(checked == true)
+    {
+        show();
+    }
+    else
+    {
+        hide();
+    }
+}
+
+
+
