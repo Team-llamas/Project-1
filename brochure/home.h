@@ -27,6 +27,8 @@ private slots:
 
     void on_home_clicked();
 
+    void on_maint_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

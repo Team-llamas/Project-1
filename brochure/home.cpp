@@ -23,20 +23,12 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_capability_clicked()
 {
-    capability wind;
-    wind.setModal(true);
-    hide();
-    wind.exec();
-    show();
+    ui->Window->setCurrentIndex(1);
 }
 
 void MainWindow::on_testimonial_clicked()
 {
-    Testimonial wind;
-    wind.setModal(true);
-    hide();
-    wind.exec();
-    show();
+    ui->Window->setCurrentIndex(3);
 }
 
 void MainWindow::on_HelpButton_clicked(bool checked)
@@ -62,10 +54,15 @@ void MainWindow::on_radioButton_clicked(bool checked)
 
 void MainWindow::on_EnvironmentButton_clicked()
 {
-    ui->Window->setCurrentIndex(1);
+    ui->Window->setCurrentIndex(4);
 }
 
 void MainWindow::on_home_clicked()
 {
     ui->Window->setCurrentIndex(0);
+}
+
+void MainWindow::on_maint_clicked()
+{
+    ui->Window->setCurrentIndex(2);
 }
