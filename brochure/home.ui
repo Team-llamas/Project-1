@@ -74,7 +74,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>380</x>
+      <x>370</x>
       <y>10</y>
       <width>91</width>
       <height>31</height>
@@ -100,14 +100,14 @@
    <widget class="QStackedWidget" name="Window">
     <property name="geometry">
      <rect>
-      <x>50</x>
-      <y>320</y>
+      <x>20</x>
+      <y>380</y>
       <width>771</width>
       <height>461</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="header">
@@ -747,8 +747,8 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="label_14">
       <property name="geometry">
        <rect>
-        <x>-30</x>
-        <y>180</y>
+        <x>0</x>
+        <y>40</y>
         <width>271</width>
         <height>211</height>
        </rect>
@@ -766,8 +766,8 @@ p, li { white-space: pre-wrap; }
      <widget class="QLabel" name="label_15">
       <property name="geometry">
        <rect>
-        <x>18</x>
-        <y>140</y>
+        <x>48</x>
+        <y>0</y>
         <width>91</width>
         <height>20</height>
        </rect>
@@ -779,8 +779,8 @@ p, li { white-space: pre-wrap; }
      <widget class="QTextBrowser" name="textBrowser_4">
       <property name="geometry">
        <rect>
-        <x>270</x>
-        <y>180</y>
+        <x>300</x>
+        <y>40</y>
         <width>271</width>
         <height>211</height>
        </rect>
@@ -795,11 +795,12 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </widget>
+    <widget class="QWidget" name="Administrator"/>
    </widget>
    <widget class="QPushButton" name="EnvironmentButton">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>480</x>
       <y>10</y>
       <width>113</width>
       <height>32</height>
@@ -864,6 +865,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Maintenance - How much it takes to take care of a machine like this&lt;/p&gt;
 &lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Testimonial - Customer reviews on the robot&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>10</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Administrator</string>
     </property>
    </widget>
   </widget>
