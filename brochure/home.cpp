@@ -3,6 +3,7 @@
 #include "testimonial.h"
 #include "ui_home.h"
 #include "QDebug"
+#include <QSqlDatabase>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->BrochureOverview->setHidden(true);
 
     ui->Window->setCurrentIndex(0);
+
+    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL");
 }
 
 MainWindow::~MainWindow()
