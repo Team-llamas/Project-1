@@ -19,6 +19,16 @@ private slots:
 
     void on_testimonial_clicked();
 
+    void on_radioButton_clicked(bool checked);
+
+    void on_HelpButton_clicked(bool checked);
+
+    void on_EnvironmentButton_clicked();
+
+    void on_home_clicked();
+
+    void on_maint_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
