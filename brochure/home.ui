@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>855</width>
-    <height>897</height>
+    <width>868</width>
+    <height>925</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -103,11 +103,11 @@
       <x>10</x>
       <y>380</y>
       <width>841</width>
-      <height>481</height>
+      <height>501</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="header">
@@ -235,6 +235,19 @@ p, li { white-space: pre-wrap; }
       </property>
       <property name="scaledContents">
        <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="indemnity">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>470</y>
+        <width>111</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Indemnity Disclaimer</string>
       </property>
      </widget>
     </widget>
@@ -716,7 +729,7 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page">
+    <widget class="QWidget" name="optionsPage">
      <widget class="QLabel" name="label_11">
       <property name="geometry">
        <rect>
@@ -776,8 +789,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>10</x>
         <y>40</y>
-        <width>47</width>
-        <height>14</height>
+        <width>231</width>
+        <height>221</height>
        </rect>
       </property>
       <property name="font">
@@ -786,7 +799,13 @@ p, li { white-space: pre-wrap; }
        </font>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/pics/roomba.jpg</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_15">
@@ -794,8 +813,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>580</x>
         <y>40</y>
-        <width>47</width>
-        <height>14</height>
+        <width>241</width>
+        <height>221</height>
        </rect>
       </property>
       <property name="font">
@@ -804,7 +823,13 @@ p, li { white-space: pre-wrap; }
        </font>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/pics/terminator.jpg</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="label_16">
@@ -812,8 +837,8 @@ p, li { white-space: pre-wrap; }
        <rect>
         <x>300</x>
         <y>40</y>
-        <width>47</width>
-        <height>14</height>
+        <width>241</width>
+        <height>221</height>
        </rect>
       </property>
       <property name="font">
@@ -822,7 +847,109 @@ p, li { white-space: pre-wrap; }
        </font>
       </property>
       <property name="text">
-       <string>TextLabel</string>
+       <string/>
+      </property>
+      <property name="pixmap">
+       <pixmap resource="images.qrc">:/pics/mediumRobot.jpg</pixmap>
+      </property>
+      <property name="scaledContents">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_14">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>270</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Basic scanning functionality w/ effective range of 3m radius around the robot&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Consumer grade wheels/tracks&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Rechargable lithium ion battery with an estimated life of 8 hours between charges&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_15">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>270</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Upgraded scanning functionality to 10m radius and ability to scan up to 15m underground (dirt surface)&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Humanoid form for ease of use and disguise&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Touchscreen which provides instant feedback for on site usage&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_16">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>270</y>
+        <width>256</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Upgraded sensors to allow for penetrations of most surfaces with densities less than or equal to lead&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Added SuperLizard skin to the robot to allow for seemless integration among humans or other mammallian forms&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:12pt;&quot;&gt;-Basic AI for auto detection&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="indemnityPage">
+     <widget class="QLabel" name="label_17">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>181</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Indemnity Clause</string>
+      </property>
+     </widget>
+     <widget class="QTextBrowser" name="textBrowser_17">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>821</width>
+        <height>431</height>
+       </rect>
+      </property>
+      <property name="html">
+       <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'MS Shell Dlg 2'; font-size:8.25pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;Except for Lessor’s gross negligence or willful misconduct, Lessee shall indemnify, protect, defend and hold harmless the Premises, Lessor and its agents, Lessor’s master or ground lessor, partners and Lenders, from and against any and all claims, loss of rents and/or damages, liens, judgments, penalties, attorneys’ and consultants’ fees, expenses and/or liabilities arising out of, involving, or in connection with, the use and/or occupancy of the Premises by Lessee. If any action or proceeding is brought against Lessor by reason of any of the foregoing matters, Lessee shall upon notice defend the same at Lessee’s expense by counsel reasonably satisfactory to Lessor and Lessor shall cooperate with Lessee in such defense. Lessor need not have first paid any such claim in order to be defended or indemnified.&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:14pt;&quot;&gt;tl;dr We are not held liable for any bodily harm or injuries resulting from or as a result of our product.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
      </widget>
     </widget>
@@ -830,7 +957,7 @@ p, li { white-space: pre-wrap; }
    <widget class="QPushButton" name="EnvironmentButton">
     <property name="geometry">
      <rect>
-      <x>510</x>
+      <x>490</x>
       <y>10</y>
       <width>113</width>
       <height>32</height>
@@ -897,6 +1024,19 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'.SF NS Text'; font-size:13pt;&quot;&gt;Testimonial - Customer reviews on the robot&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="OptionsButton">
+    <property name="geometry">
+     <rect>
+      <x>620</x>
+      <y>10</y>
+      <width>113</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Options</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="enabled">
@@ -906,7 +1046,7 @@ p, li { white-space: pre-wrap; }
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>855</width>
+     <width>868</width>
      <height>21</height>
     </rect>
    </property>

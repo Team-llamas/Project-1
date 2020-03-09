@@ -29,6 +29,10 @@ private slots:
 
     void on_maint_clicked();
 
+    void on_OptionsButton_clicked();
+
+    void on_indemnity_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

@@ -66,3 +66,13 @@ void MainWindow::on_maint_clicked()
 {
     ui->Window->setCurrentIndex(2);
 }
+
+void MainWindow::on_OptionsButton_clicked()
+{
+    ui->Window->setCurrentIndex(5);
+}
+
+void MainWindow::on_indemnity_clicked()
+{
+    ui->Window->setCurrentIndex(6);
+}
