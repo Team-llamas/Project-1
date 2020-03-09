@@ -10,5 +10,8 @@
         <file>pokemon-go-egg.jpg</file>
         <file>omelette.jpeg</file>
         <file>sunny-egg.jpg</file>
+        <file>mediumRobot.jpg</file>
+        <file>roomba.jpg</file>
+        <file>terminator.jpg</file>
     </qresource>
 </RCC>
