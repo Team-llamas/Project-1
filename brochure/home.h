@@ -2,13 +2,14 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "QString"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
 
-const int SIZE = 1;
+const int VAILD_ACCOUNT_SIZE = 1;
 
 class MainWindow : public QMainWindow
 {
@@ -17,6 +18,8 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+    bool AttemptLogin(QString inputPassword, QString inputUserName);
 private slots:
     void on_capability_clicked();
 
@@ -34,18 +37,13 @@ private slots:
 
     void on_pushButton_clicked();
 
-    bool AttemptLogin(QString inputPassword[], QString inputUserName[], bool validPassword, bool validUserName);
+    void on_administrator_clicked();
 
 private:
     Ui::MainWindow *ui;
 
-    QString inputPassword[10];
+    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"};
 
-    QString inputUserName[10];
-
-    bool validPassword;
-
-    bool validUserName;
-
+    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"};
 };
 #endif // MAINWINDOW_H

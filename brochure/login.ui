@@ -69,6 +69,22 @@
     </item>
    </layout>
   </widget>
+  <widget class="QLabel" name="invalidLogin">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>20</y>
+     <width>321</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(239, 41, 41);</string>
+   </property>
+   <property name="text">
+    <string>Wrong Username or Password, Please try agin</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections>

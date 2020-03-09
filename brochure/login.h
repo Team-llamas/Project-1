@@ -19,6 +19,10 @@ public:
 
 private slots:
 
+    void on_buttonBox_accepted();
+
+    void accept();
+
 private:
     Ui::Login *ui;
 

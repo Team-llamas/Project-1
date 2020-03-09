@@ -9,7 +9,7 @@ Login::Login(MainWindow *home, QWidget *parent) :
 
     this -> home = home;
 
-
+    ui->invalidLogin->setVisible(false);
 }
 
 Login::~Login()
@@ -17,6 +17,24 @@ Login::~Login()
     delete ui;
 }
 
+void Login::accept()
+{
+    bool loginSuccess; //A boolean value that keeps track of whether or not
+                       //the login was successful
 
+    loginSuccess = home->AttemptLogin(ui->InputPassword->text(), ui->InputUsername->text());
 
+    if (loginSuccess)
+    {
+        done(Accepted);
+    }
+    else
+    {
+        ui->invalidLogin->setVisible(true);
+    }
+}
 
+void Login::on_buttonBox_accepted()
+{
+
+}
