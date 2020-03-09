@@ -3,6 +3,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++11
+QT += sql
 
 # The following define makes your compiler emit warnings if you use
 # any Qt feature that has been marked deprecated (the exact warnings
@@ -18,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     capability.cpp \
     home.cpp \
+    login.cpp \
     main.cpp \
     maint.cpp \
     testimonial.cpp
@@ -25,12 +27,14 @@ SOURCES += \
 HEADERS += \
     capability.h \
     home.h \
+    login.h \
     maint.h \
     testimonial.h
 
 FORMS += \
     capability.ui \
     home.ui \
+    login.ui \
     maint.ui \
     testimonial.ui
 

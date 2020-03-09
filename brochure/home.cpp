@@ -1,8 +1,8 @@
 #include "home.h"
-#include "capability.h"
-#include "testimonial.h"
+#include "login.h"
 #include "ui_home.h"
 #include "QDebug"
+#include <QSqlDatabase>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -13,6 +13,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->BrochureOverview->setHidden(true);
 
     ui->Window->setCurrentIndex(0);
+
+    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL");
 }
 
 MainWindow::~MainWindow()
@@ -65,4 +67,38 @@ void MainWindow::on_home_clicked()
 void MainWindow::on_maint_clicked()
 {
     ui->Window->setCurrentIndex(2);
+}
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->Window->setCurrentIndex(5);
+}
+
+void MainWindow::on_administrator_clicked()
+{
+    Login prompt(this); //The widow that prompts the user to login
+
+    prompt.exec();
+
+//    show();
+}
+
+bool MainWindow::AttemptLogin(QString inputPassword, QString inputUserName)
+{
+    bool loginSuccessful = false; //A boolean that keep track of whether or not the login
+                                  //was successful
+
+    for(int index = 0; index < VAILD_ACCOUNT_SIZE; index++)
+    {
+
+        if(inputPassword == VALID_PASSWORD[index] && inputUserName == VALID_USERNAME[index])
+        {
+            ui->Window->setCurrentIndex(5);
+
+            loginSuccessful = true;
+        }
+
+    }
+
+    return loginSuccessful;
 }
