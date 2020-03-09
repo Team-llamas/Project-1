@@ -7,6 +7,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
+
+const int SIZE = 1;
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -29,7 +32,20 @@ private slots:
 
     void on_maint_clicked();
 
+    void on_pushButton_clicked();
+
+    bool AttemptLogin(QString inputPassword[], QString inputUserName[], bool validPassword, bool validUserName);
+
 private:
     Ui::MainWindow *ui;
+
+    QString inputPassword[10];
+
+    QString inputUserName[10];
+
+    bool validPassword;
+
+    bool validUserName;
+
 };
 #endif // MAINWINDOW_H

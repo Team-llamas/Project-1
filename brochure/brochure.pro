@@ -19,6 +19,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     capability.cpp \
     home.cpp \
+    login.cpp \
     main.cpp \
     maint.cpp \
     testimonial.cpp
@@ -26,12 +27,14 @@ SOURCES += \
 HEADERS += \
     capability.h \
     home.h \
+    login.h \
     maint.h \
     testimonial.h
 
 FORMS += \
     capability.ui \
     home.ui \
+    login.ui \
     maint.ui \
     testimonial.ui
 

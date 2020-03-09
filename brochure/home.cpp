@@ -69,3 +69,32 @@ void MainWindow::on_maint_clicked()
 {
     ui->Window->setCurrentIndex(2);
 }
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->Window->setCurrentIndex(5);
+}
+
+
+bool AttemptLogin(QString inputPassword[], QString inputUserName[], bool validPassword, bool validUserName)
+{
+
+    for(int i = 0; i < SIZE; i++)
+    {
+
+        if(inputPassword[i] == validPassword)
+        {
+
+        }
+
+    }
+
+
+}
+
+
+
+
+
+
+
