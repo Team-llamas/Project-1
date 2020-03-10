@@ -112,3 +112,4 @@ void MainWindow::on_buyNow_clicked()
 {
     ui->Window->setCurrentIndex(6);
 }
+
