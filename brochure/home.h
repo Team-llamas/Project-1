@@ -39,6 +39,10 @@ private slots:
 
     void on_administrator_clicked();
 
+    void on_indemnity_clicked();
+
+    void on_buyNow_clicked();
+
 private:
     Ui::MainWindow *ui;
 

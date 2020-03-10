@@ -102,3 +102,14 @@ bool MainWindow::AttemptLogin(QString inputPassword, QString inputUserName)
 
     return loginSuccessful;
 }
+
+void MainWindow::on_indemnity_clicked()
+{
+    ui->Window->setCurrentIndex(7);
+}
+
+void MainWindow::on_buyNow_clicked()
+{
+    ui->Window->setCurrentIndex(6);
+}
+

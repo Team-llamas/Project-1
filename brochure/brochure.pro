@@ -44,4 +44,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
+    ../../../Project-1-insurance/Project-1-insurance/brochure/images.qrc \
     images.qrc
