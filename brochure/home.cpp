@@ -2,7 +2,7 @@
 #include "login.h"
 #include "ui_home.h"
 #include "QDebug"
-#include <QSqlDatabase>
+#include <QSqlError>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,12 +14,23 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->Window->setCurrentIndex(0);
 
-    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL");
+    databaseQuery = new QSqlQuery;
+
+    database = QSqlDatabase::addDatabase("QSQLITE");
+
+    if (!database.open())
+    {
+        throw database.lastError();
+    }
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    delete databaseQuery;
+
+    database.close();
 }
 
 

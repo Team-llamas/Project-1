@@ -3,6 +3,9 @@
 
 #include <QMainWindow>
 #include "QString"
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -45,6 +48,10 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QSqlQuery *databaseQuery;
+
+    QSqlDatabase database;
 
     const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"};
 
