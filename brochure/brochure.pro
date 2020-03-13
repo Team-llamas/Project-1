@@ -17,26 +17,17 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    capability.cpp \
     home.cpp \
     login.cpp \
-    main.cpp \
-    maint.cpp \
-    testimonial.cpp
+    main.cpp
 
 HEADERS += \
-    capability.h \
     home.h \
-    login.h \
-    maint.h \
-    testimonial.h
+    login.h
 
 FORMS += \
-    capability.ui \
     home.ui \
-    login.ui \
-    maint.ui \
-    testimonial.ui
+    login.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -44,5 +35,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    ../../../Project-1-insurance/Project-1-insurance/brochure/images.qrc \
     images.qrc
