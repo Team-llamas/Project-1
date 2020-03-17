@@ -20,6 +20,9 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
    <widget class="QPushButton" name="home">
     <property name="enabled">
      <bool>true</bool>
@@ -797,7 +800,7 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
     <widget class="QWidget" name="Administrator">
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -848,6 +851,9 @@ p, li { white-space: pre-wrap; }
        </item>
        <item>
         <widget class="QTextEdit" name="databaseDisplay">
+         <property name="styleSheet">
+          <string notr="true">font: 10pt &quot;Ubuntu Mono&quot;;</string>
+         </property>
          <property name="readOnly">
           <bool>true</bool>
          </property>

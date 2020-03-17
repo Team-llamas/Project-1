@@ -5,6 +5,7 @@
 #include "QDebug"
 #include <QSqlError>
 #include <QSqlDriver>
+#include <QChar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -187,29 +188,43 @@ void MainWindow::on_addCustomerButton_clicked()
 
 void MainWindow::on_pushButton_8_clicked()
 {
-    bool retrievalSuccessful; //A boolean value to check if the query succeeded
-    bool empty = true; //A boolean that checks if the database is empty
-    QString text; //The QString that is displayed on the text edit
-    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList");
+   //constant
+   const int NUM_COLUMNS = 7;  //The number of columns in the database
+   const int DATA_WIDTH  = 15; //The width of the output data
 
-    if (!retrievalSuccessful)
-    {
+   //variables
+   bool retrievalSuccessful; //A boolean value to check if the query succeeded
+   bool empty = true;        //A boolean that checks if the database is empty
+   QString text;             //The QString that is displayed on the text edit
+   retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList");
+
+   if (!retrievalSuccessful)
+   {
         qDebug() << "yep" << endl;
         QSqlError error = databaseQuery->lastError();
 
         qDebug() << error.text() << endl;
 
         throw error;
-    }
+   }
+
+   text = "Name";
+   text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+   text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append('\n');
 
    while (databaseQuery->next())
    {
-       const int NUM_COLUMNS = 7; //The number of columns in the database
+       empty = false;
 
-       empty = false; //A boolean value that keep track of whether or not the database is empty
        for (int index = 0; index < NUM_COLUMNS; index++)
        {
-           text = text + " " + databaseQuery->value(index).toString();
+           text.append(databaseQuery->value(index).toString().leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
        }//end for (int index = 0; index < databaseQuery->size(); index++)
         text = text + '\n';
     }//end while (databaseQuery->next())
