@@ -19,15 +19,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
     home.cpp \
     login.cpp \
-    main.cpp
+    main.cpp \
+    addcustomer.cpp
 
 HEADERS += \
     home.h \
-    login.h
+    login.h \
+    addcustomer.h \
+    interestlevel.h
 
 FORMS += \
     home.ui \
-    login.ui
+    login.ui \
+    addcustomer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

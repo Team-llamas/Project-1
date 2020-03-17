@@ -1,8 +1,10 @@
 #include "home.h"
 #include "login.h"
+#include "addcustomer.h"
 #include "ui_home.h"
 #include "QDebug"
 #include <QSqlError>
+#include <QSqlDriver>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,15 +14,26 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->BrochureOverview->setHidden(true);
 
+
     ui->Window->setCurrentIndex(0);
-
-    databaseQuery = new QSqlQuery;
-
     database = QSqlDatabase::addDatabase("QSQLITE");
+
+    database.setDatabaseName("database.db");
+
+    qDebug() << database.databaseName() << " " << database.connectionName() << endl;
 
     if (!database.open())
     {
         throw database.lastError();
+    }
+
+    databaseQuery = new QSqlQuery;
+
+    bool createTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
+
+    if (!createTableError)
+    {
+        qDebug() << databaseQuery->lastError().text();
     }
 }
 
@@ -89,9 +102,9 @@ void MainWindow::on_administrator_clicked()
 {
     Login prompt(this); //The widow that prompts the user to login
 
-    prompt.exec();
+    prompt.setModal(true);
 
-//    show();
+    prompt.exec();
 }
 
 bool MainWindow::AttemptLogin(QString inputPassword, QString inputUserName)
@@ -124,3 +137,87 @@ void MainWindow::on_buyNow_clicked()
     ui->Window->setCurrentIndex(6);
 }
 
+void MainWindow::createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest)
+{
+//    QString testQuery = "INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) VALUES ('TestName', 'TestNumber', 'TestEmail', 'TestBusiness', FALSE, 'No Interest', 'Doesn't Want a Pamphlet')";
+
+    databaseQuery->prepare("INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) "
+                           "VALUES (?, ?, ?, ?, ?, ?, ?)");
+    databaseQuery->addBindValue(name);
+    databaseQuery->addBindValue(phoneNumber);
+    databaseQuery->addBindValue(email);
+    databaseQuery->addBindValue(business);
+    databaseQuery->addBindValue(keyCustomer);
+    databaseQuery->addBindValue("No Interest");
+    databaseQuery->bindValue(6, "Doesn't want a pamphlet");
+
+    if (database.driver()->hasFeature(QSqlDriver::PositionalPlaceholders))
+    {
+        qDebug() << "No problem";
+    }
+    else
+    {
+        qDebug() << "There is a problem";
+    }
+
+    bool check = databaseQuery->exec();
+    if (!check)
+    {
+        qDebug() << databaseQuery->lastError().text();
+    }
+    else
+    {
+        qDebug() << databaseQuery->lastQuery();
+        databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
+        if (databaseQuery->next())
+        {
+            qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
+        }
+    }
+}
+
+void MainWindow::on_addCustomerButton_clicked()
+{
+    addCustomer prompt(this); //The Qdialog that allow the user to input data
+
+    prompt.setModal(true);
+
+    prompt.exec();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+    bool retrievalSuccessful; //A boolean value to check if the query succeeded
+    bool empty = true; //A boolean that checks if the database is empty
+    QString text; //The QString that is displayed on the text edit
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList");
+
+    if (!retrievalSuccessful)
+    {
+        qDebug() << "yep" << endl;
+        QSqlError error = databaseQuery->lastError();
+
+        qDebug() << error.text() << endl;
+
+        throw error;
+    }
+
+   while (databaseQuery->next())
+   {
+       const int NUM_COLUMNS = 7; //The number of columns in the database
+
+       empty = false; //A boolean value that keep track of whether or not the database is empty
+       for (int index = 0; index < NUM_COLUMNS; index++)
+       {
+           text = text + " " + databaseQuery->value(index).toString();
+       }//end for (int index = 0; index < databaseQuery->size(); index++)
+        text = text + '\n';
+    }//end while (databaseQuery->next())
+
+    if (empty)
+    {
+        text = "The database is empty";
+    }
+
+    ui->databaseDisplay->setText(text);
+}

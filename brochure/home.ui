@@ -107,7 +107,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>7</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="header">
@@ -797,18 +797,63 @@ p, li { white-space: pre-wrap; }
      </widget>
     </widget>
     <widget class="QWidget" name="Administrator">
-     <widget class="QLabel" name="label_16">
+     <widget class="QWidget" name="">
       <property name="geometry">
        <rect>
-        <x>120</x>
-        <y>60</y>
-        <width>241</width>
-        <height>81</height>
+        <x>30</x>
+        <y>30</y>
+        <width>751</width>
+        <height>421</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Welcome to administrator page!</string>
-      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <layout class="QHBoxLayout" name="horizontalLayout">
+         <item>
+          <widget class="QPushButton" name="addCustomerButton">
+           <property name="text">
+            <string>Add Customer</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="editDatabaseButton">
+           <property name="text">
+            <string>Edit Database</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="deleteCustomerButton">
+           <property name="text">
+            <string>Delete Customer</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_8">
+           <property name="text">
+            <string>Print Unsorted Database</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton_10">
+           <property name="text">
+            <string>PushButton</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </item>
+       <item>
+        <widget class="QTextEdit" name="databaseDisplay">
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="optionsPage">
@@ -1124,7 +1169,7 @@ p, li { white-space: pre-wrap; }
      <rect>
       <x>20</x>
       <y>860</y>
-      <width>131</width>
+      <width>161</width>
       <height>31</height>
      </rect>
     </property>
