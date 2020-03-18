@@ -25,7 +25,7 @@ public:
 
     bool AttemptLogin(QString inputPassword, QString inputUserName);
 
-    void createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
+    bool createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
 private slots:
     void on_capability_clicked();
 

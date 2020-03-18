@@ -138,9 +138,9 @@ void MainWindow::on_buyNow_clicked()
     ui->Window->setCurrentIndex(6);
 }
 
-void MainWindow::createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest)
+bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest)
 {
-//    QString testQuery = "INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) VALUES ('TestName', 'TestNumber', 'TestEmail', 'TestBusiness', FALSE, 'No Interest', 'Doesn't Want a Pamphlet')";
+    bool uniqueName = true; //A boolean value the keeps of whether or not the name was unique
 
     databaseQuery->prepare("INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) "
                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
@@ -168,29 +168,35 @@ void MainWindow::createCustomer(QString name, QString phoneNumber, QString email
 
     databaseQuery->bindValue(6, "Doesn't want a pamphlet");
 
-    if (database.driver()->hasFeature(QSqlDriver::PositionalPlaceholders))
+    try
     {
-        qDebug() << "No problem";
-    }
-    else
-    {
-        qDebug() << "There is a problem";
-    }
-
-    bool check = databaseQuery->exec();
-    if (!check)
-    {
-        qDebug() << databaseQuery->lastError().text();
-    }
-    else
-    {
-        qDebug() << databaseQuery->lastQuery();
-        databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
-        if (databaseQuery->next())
+        bool check = databaseQuery->exec();
+        if (!check)
         {
-            qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
-        }
-    }
+            qDebug() << databaseQuery->lastError().text();
+
+            throw databaseQuery->lastError();
+        }//end if (!check)
+        else
+        {
+            qDebug() << databaseQuery->lastQuery();
+            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
+            if (databaseQuery->next())
+            {
+                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
+            }//end if (databaseQuery->next())
+        }//end else (if (!checked))
+    }//end try
+    catch (QSqlError error)
+    {
+        if (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row")
+        {
+            uniqueName = false;
+        }//end f (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row")
+
+    }//end catch (QsqlError error)
+
+    return uniqueName;
 }
 
 void MainWindow::on_addCustomerButton_clicked()

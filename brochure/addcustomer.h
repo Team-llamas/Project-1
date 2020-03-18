@@ -19,6 +19,8 @@ public:
 private slots:
     void on_acceptCancelButtonBox_accepted();
 
+    void accept();
+
 private:
     Ui::addCustomer *ui;
 

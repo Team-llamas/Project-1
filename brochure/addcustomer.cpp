@@ -9,6 +9,8 @@ addCustomer::addCustomer(MainWindow *window, QWidget *parent) :
     ui->setupUi(this);
 
     home = window;
+
+    ui->invalidNameLabel->setVisible(false);
 }
 
 addCustomer::~addCustomer()
@@ -16,7 +18,7 @@ addCustomer::~addCustomer()
     delete ui;
 }
 
-void addCustomer::on_acceptCancelButtonBox_accepted()
+void addCustomer::accept()
 {
        QString tempName        = ui->inputName->text();        //The name of the customer
        QString tempPhoneNumber = ui->inputPhoneNumber->text(); //The phone number of the customer
@@ -69,8 +71,20 @@ void addCustomer::on_acceptCancelButtonBox_accepted()
            tempInterestLevel = NO_INTEREST;
        }
 
-       home->createCustomer(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel);
+       if (home->createCustomer(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
+       {
+           done(Accepted);
+       }
+       else
+       {
+            ui->invalidNameLabel->setVisible(true);
+       }
 
 
+
+}
+
+void addCustomer::on_acceptCancelButtonBox_accepted()
+{
 
 }
