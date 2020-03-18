@@ -20,17 +20,20 @@ SOURCES += \
     home.cpp \
     login.cpp \
     main.cpp \
+    searchdatabase.cpp \
     addcustomer.cpp
 
 HEADERS += \
     home.h \
     login.h \
+    searchdatabase.h \
     addcustomer.h \
     interestlevel.h
 
 FORMS += \
     home.ui \
     login.ui \
+    searchdatabase.ui \
     addcustomer.ui
 
 # Default rules for deployment.
