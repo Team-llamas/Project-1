@@ -149,7 +149,23 @@ void MainWindow::createCustomer(QString name, QString phoneNumber, QString email
     databaseQuery->addBindValue(email);
     databaseQuery->addBindValue(business);
     databaseQuery->addBindValue(keyCustomer);
-    databaseQuery->addBindValue("No Interest");
+
+    qDebug() << interest;
+    switch (interest)
+    {
+    case NO_INTEREST       : databaseQuery->addBindValue("No Interest");
+                             break;
+    case LOW_INTEREST      : databaseQuery->addBindValue("Low Interest");
+                             break;
+    case MODERATE_INTEREST : databaseQuery->addBindValue("Moderate Interest");
+                             break;
+    case HIGH_INTEREST     : databaseQuery->addBindValue("High Interest");
+                             break;
+    case EXTREMELY_HIGH_INTEREST : databaseQuery->addBindValue("Extremely High Interest");
+                                   break;
+
+    }
+
     databaseQuery->bindValue(6, "Doesn't want a pamphlet");
 
     if (database.driver()->hasFeature(QSqlDriver::PositionalPlaceholders))
@@ -190,12 +206,11 @@ void MainWindow::on_pushButton_8_clicked()
 {
    //constant
    const int NUM_COLUMNS = 7;  //The number of columns in the database
-   const int DATA_WIDTH  = 15; //The width of the output data
 
    //variables
    bool retrievalSuccessful; //A boolean value to check if the query succeeded
-   bool empty = true;        //A boolean that checks if the database is empty
    QString text;             //The QString that is displayed on the text edit
+
    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList");
 
    if (!retrievalSuccessful)
@@ -218,21 +233,28 @@ void MainWindow::on_pushButton_8_clicked()
    text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
    text.append('\n');
 
-   while (databaseQuery->next())
-   {
-       empty = false;
+   printDatabase(text, NUM_COLUMNS);
+}
 
-       for (int index = 0; index < NUM_COLUMNS; index++)
-       {
-           text.append(databaseQuery->value(index).toString().leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
-       }//end for (int index = 0; index < databaseQuery->size(); index++)
-        text = text + '\n';
-    }//end while (databaseQuery->next())
+void MainWindow::printDatabase(QString text, const int NUM_COLUMNS) const
+{
+    bool empty = true; //A boolean that checks if the database is empty
 
-    if (empty)
+    while (databaseQuery->next())
     {
-        text = "The database is empty";
-    }
+        empty = false;
 
-    ui->databaseDisplay->setText(text);
+        for (int index = 0; index < NUM_COLUMNS; index++)
+        {
+            text.append(databaseQuery->value(index).toString().leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+        }//end for (int index = 0; index < databaseQuery->size(); index++)
+         text = text + '\n';
+     }//end while (databaseQuery->next())
+
+     if (empty)
+     {
+         text = "The database is empty";
+     }
+
+     ui->databaseDisplay->setText(text);
 }

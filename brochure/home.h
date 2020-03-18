@@ -54,6 +54,8 @@ private slots:
     void on_pushButton_8_clicked();
 
 private:
+    const int DATA_WIDTH  = 15; //The width of the output data
+
     Ui::MainWindow *ui;
 
     QSqlQuery *databaseQuery;
@@ -63,5 +65,7 @@ private:
     const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"};
 
     const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"};
+
+    void printDatabase(QString text, const int NUM_COLUMNS) const;
 };
 #endif // MAINWINDOW_H
