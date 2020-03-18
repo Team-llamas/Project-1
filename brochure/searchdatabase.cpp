@@ -23,4 +23,5 @@ void SearchDatabase::on_buttonBox_accepted()
     inputName = "SELECT * FROM database WHERE name = " + ui->InputText->text();
 
 
+
 }
