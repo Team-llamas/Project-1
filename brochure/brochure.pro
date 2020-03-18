@@ -21,22 +21,34 @@ SOURCES += \
     home.cpp \
     login.cpp \
     main.cpp \
+<<<<<<< Updated upstream
     maint.cpp \
     testimonial.cpp
+=======
+    searchdatabase.cpp
+>>>>>>> Stashed changes
 
 HEADERS += \
     capability.h \
     home.h \
     login.h \
+<<<<<<< Updated upstream
     maint.h \
     testimonial.h
+=======
+    searchdatabase.h
+>>>>>>> Stashed changes
 
 FORMS += \
     capability.ui \
     home.ui \
     login.ui \
+<<<<<<< Updated upstream
     maint.ui \
     testimonial.ui
+=======
+    searchdatabase.ui
+>>>>>>> Stashed changes
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
