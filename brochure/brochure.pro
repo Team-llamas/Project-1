@@ -17,24 +17,24 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    capability.cpp \
     home.cpp \
     login.cpp \
     main.cpp \
-    searchdatabase.cpp
-
+    searchdatabase.cpp \
+    addcustomer.cpp
 
 HEADERS += \
-    capability.h \
     home.h \
     login.h \
-    searchdatabase.h
+    searchdatabase.h \
+    addcustomer.h \
+    interestlevel.h
 
 FORMS += \
-    capability.ui \
     home.ui \
     login.ui \
-    searchdatabase.ui
+    searchdatabase.ui \
+    addcustomer.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

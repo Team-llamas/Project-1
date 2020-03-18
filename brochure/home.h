@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include "QString"
+#include <QSql>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include "interestlevel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -20,6 +24,8 @@ public:
     ~MainWindow();
 
     bool AttemptLogin(QString inputPassword, QString inputUserName);
+
+    bool createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
 private slots:
     void on_capability_clicked();
 
@@ -43,11 +49,23 @@ private slots:
 
     void on_buyNow_clicked();
 
+    void on_addCustomerButton_clicked();
+
+    void on_pushButton_8_clicked();
+
 private:
+    const int DATA_WIDTH  = 15; //The width of the output data
+
     Ui::MainWindow *ui;
+
+    QSqlQuery *databaseQuery;
+
+    QSqlDatabase database;
 
     const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"};
 
     const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"};
+
+    void printDatabase(QString text, const int NUM_COLUMNS) const;
 };
 #endif // MAINWINDOW_H

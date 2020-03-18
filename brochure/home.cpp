@@ -1,8 +1,11 @@
 #include "home.h"
 #include "login.h"
+#include "addcustomer.h"
 #include "ui_home.h"
 #include "QDebug"
-#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlDriver>
+#include <QChar>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,14 +15,36 @@ MainWindow::MainWindow(QWidget *parent)
 
     ui->BrochureOverview->setHidden(true);
 
-    ui->Window->setCurrentIndex(0);
 
-    QSqlDatabase database = QSqlDatabase::addDatabase("QMYSQL");
+    ui->Window->setCurrentIndex(0);
+    database = QSqlDatabase::addDatabase("QSQLITE");
+
+    database.setDatabaseName("database.db");
+
+    qDebug() << database.databaseName() << " " << database.connectionName() << endl;
+
+    if (!database.open())
+    {
+        throw database.lastError();
+    }
+
+    databaseQuery = new QSqlQuery;
+
+    bool createTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
+
+    if (!createTableError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+    }
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+
+    delete databaseQuery;
+
+    database.close();
 }
 
 
@@ -78,9 +103,9 @@ void MainWindow::on_administrator_clicked()
 {
     Login prompt(this); //The widow that prompts the user to login
 
-    prompt.exec();
+    prompt.setModal(true);
 
-//    show();
+    prompt.exec();
 }
 
 bool MainWindow::AttemptLogin(QString inputPassword, QString inputUserName)
@@ -113,3 +138,141 @@ void MainWindow::on_buyNow_clicked()
     ui->Window->setCurrentIndex(6);
 }
 
+bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest)
+{
+    bool uniqueName = true; //A boolean value the keeps of whether or not the name was unique
+
+    databaseQuery->prepare("INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) "
+                           "VALUES (?, ?, ?, ?, ?, ?, ?)");
+
+    if (name == "Not Given")
+    {
+        databaseQuery->addBindValue(QVariant(QVariant::String));
+    }
+    else
+    {
+        databaseQuery->addBindValue(name);
+    }
+    databaseQuery->addBindValue(phoneNumber);
+    databaseQuery->addBindValue(email);
+    databaseQuery->addBindValue(business);
+    databaseQuery->addBindValue(keyCustomer);
+
+    qDebug() << interest;
+    switch (interest)
+    {
+    case NO_INTEREST       : databaseQuery->addBindValue("No Interest");
+                             break;
+    case LOW_INTEREST      : databaseQuery->addBindValue("Low Interest");
+                             break;
+    case MODERATE_INTEREST : databaseQuery->addBindValue("Moderate Interest");
+                             break;
+    case HIGH_INTEREST     : databaseQuery->addBindValue("High Interest");
+                             break;
+    case EXTREMELY_HIGH_INTEREST : databaseQuery->addBindValue("Extremely High Interest");
+                                   break;
+
+    }
+
+    databaseQuery->bindValue(6, "Doesn't want a pamphlet");
+
+    try
+    {
+        bool check = databaseQuery->exec();
+        if (!check)
+        {
+            qDebug() << databaseQuery->lastError().text();
+
+            throw databaseQuery->lastError();
+        }//end if (!check)
+        else
+        {
+            qDebug() << databaseQuery->lastQuery();
+            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
+            if (databaseQuery->next())
+            {
+                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
+            }//end if (databaseQuery->next())
+        }//end else (if (!checked))
+    }//end try
+    catch (QSqlError error)
+    {
+        if (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row" || error.text() == "NOT NULL constraint failed: customerList.name Unable to fetch row")
+        {
+            uniqueName = false;
+        }//end f (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row")
+        else
+        {
+            throw error;
+        }
+
+    }//end catch (QsqlError error)
+
+    return uniqueName;
+}
+
+void MainWindow::on_addCustomerButton_clicked()
+{
+    addCustomer prompt(this); //The Qdialog that allow the user to input data
+
+    prompt.setModal(true);
+
+    prompt.exec();
+}
+
+void MainWindow::on_pushButton_8_clicked()
+{
+   //constant
+   const int NUM_COLUMNS = 7;  //The number of columns in the database
+
+   //variables
+   bool retrievalSuccessful; //A boolean value to check if the query succeeded
+   QString text;             //The QString that is displayed on the text edit
+
+   retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList");
+
+   if (!retrievalSuccessful)
+   {
+        qDebug() << "yep" << endl;
+        QSqlError error = databaseQuery->lastError();
+
+        qDebug() << error.text() << endl;
+
+        throw error;
+   }
+
+   text = "Name";
+   text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+   text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+   text.append('\n');
+
+   printDatabase(text, NUM_COLUMNS);
+}
+
+void MainWindow::printDatabase(QString text, const int NUM_COLUMNS) const
+{
+    bool empty = true; //A boolean that checks if the database is empty
+
+    while (databaseQuery->next())
+    {
+        empty = false;
+
+        for (int index = 0; index < NUM_COLUMNS; index++)
+        {
+            text.append(databaseQuery->value(index).toString().leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+        }//end for (int index = 0; index < databaseQuery->size(); index++)
+         text = text + '\n';
+     }//end while (databaseQuery->next())
+
+     if (empty)
+     {
+         text = "The database is empty";
+     }
+
+     ui->databaseDisplay->setText(text);
+}
