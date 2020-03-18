@@ -30,7 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     databaseQuery = new QSqlQuery;
 
-    bool createTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
+    bool createTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
 
     if (!createTableError)
     {
@@ -144,7 +144,15 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
 
     databaseQuery->prepare("INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) "
                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
-    databaseQuery->addBindValue(name);
+
+    if (name == "Not Given")
+    {
+        databaseQuery->addBindValue(QVariant(QVariant::String));
+    }
+    else
+    {
+        databaseQuery->addBindValue(name);
+    }
     databaseQuery->addBindValue(phoneNumber);
     databaseQuery->addBindValue(email);
     databaseQuery->addBindValue(business);
@@ -189,10 +197,14 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
     }//end try
     catch (QSqlError error)
     {
-        if (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row")
+        if (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row" || error.text() == "NOT NULL constraint failed: customerList.name Unable to fetch row")
         {
             uniqueName = false;
         }//end f (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row")
+        else
+        {
+            throw error;
+        }
 
     }//end catch (QsqlError error)
 
