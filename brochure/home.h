@@ -53,6 +53,10 @@ private slots:
 
     void on_pushButton_8_clicked();
 
+    void on_clearButton_clicked();
+
+    void on_printByNameButton_clicked();
+
 private:
     const int DATA_WIDTH  = 15; //The width of the output data
 

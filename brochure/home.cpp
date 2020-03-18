@@ -276,3 +276,42 @@ void MainWindow::printDatabase(QString text, const int NUM_COLUMNS) const
 
      ui->databaseDisplay->setText(text);
 }
+
+void MainWindow::on_clearButton_clicked()
+{
+    ui->databaseDisplay->setText("");
+}
+
+void MainWindow::on_printByNameButton_clicked()
+{
+    //constant
+    const int NUM_COLUMNS = 7;  //The number of columns in the database
+
+    //variables
+    bool retrievalSuccessful; //A boolean value to check if the query succeeded
+    QString text;             //The QString that is displayed on the text edit
+
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList ORDEREDBY name");
+
+    if (!retrievalSuccessful)
+    {
+         qDebug() << "yep" << endl;
+         QSqlError error = databaseQuery->lastError();
+
+         qDebug() << error.text() << endl;
+
+         throw error;
+    }
+
+    text = "Name";
+    text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+    text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+
+    printDatabase(text, NUM_COLUMNS);
+}
