@@ -1,6 +1,8 @@
 #include "home.h"
 #include "login.h"
 #include "addcustomer.h"
+#include "searchdatabase.h"
+#include "deleteconfirmation.h"
 #include "ui_home.h"
 #include "QDebug"
 #include <QSqlError>
@@ -174,7 +176,7 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
 
     }
 
-    databaseQuery->bindValue(6, "Doesn't want a pamphlet");
+    databaseQuery->bindValue(6, "No");
 
     try
     {
@@ -314,4 +316,30 @@ void MainWindow::on_printByNameButton_clicked()
     text.append('\n');
 
     printDatabase(text, NUM_COLUMNS);
+}
+
+void MainWindow::searchDatabasePrompt()
+{
+    SearchDatabase search(this); //The Qdialog that prompts the user to enter their name
+
+    search.setModal(true);
+
+    search.exec();
+}
+
+void MainWindow::searchDatabaseResult(QSqlQuery customerFound)
+{
+    lastCustomerSearched = customerFound;
+}
+
+
+void MainWindow::on_deleteCustomerButton_clicked()
+{
+    searchDatabasePrompt();
+
+    deleteConfirmation deleteCustomer(lastCustomerSearched);
+
+    deleteCustomer.setModal(true);
+
+    deleteCustomer.exec();
 }

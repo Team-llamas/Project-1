@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SearchDatabase</class>
- <widget class="QDialog" name="SearchDatabase">
+ <class>deleteConfirmation</class>
+ <widget class="QDialog" name="deleteConfirmation">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>891</width>
+    <height>156</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
+  <widget class="QDialogButtonBox" name="acceptButtonBox">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>240</y>
+     <x>510</x>
+     <y>120</y>
      <width>341</width>
      <height>32</height>
     </rect>
@@ -29,52 +29,41 @@
     <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
    </property>
   </widget>
-  <widget class="QWidget" name="layoutWidget">
+  <widget class="QWidget" name="">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>60</y>
-     <width>212</width>
-     <height>27</height>
+     <x>0</x>
+     <y>10</y>
+     <width>871</width>
+     <height>95</height>
     </rect>
    </property>
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QVBoxLayout" name="customerLayout">
     <item>
-     <widget class="QLabel" name="InputName">
+     <widget class="QLabel" name="questionLable">
       <property name="text">
-       <string>Enter name: </string>
+       <string>Are you sure you want to delete the following customer?</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QLineEdit" name="InputText"/>
+     <widget class="QTextBrowser" name="customDisplay">
+      <property name="font">
+       <font>
+        <family>Ubuntu Mono</family>
+       </font>
+      </property>
+     </widget>
     </item>
    </layout>
-  </widget>
-  <widget class="QLabel" name="notFoundLabel">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>20</y>
-     <width>331</width>
-     <height>17</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">
-color: rgb(255, 0, 0);</string>
-   </property>
-   <property name="text">
-    <string>That customer was not found in the database</string>
-   </property>
   </widget>
  </widget>
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>acceptButtonBox</sender>
    <signal>accepted()</signal>
-   <receiver>SearchDatabase</receiver>
+   <receiver>deleteConfirmation</receiver>
    <slot>accept()</slot>
    <hints>
     <hint type="sourcelabel">
@@ -88,9 +77,9 @@ color: rgb(255, 0, 0);</string>
    </hints>
   </connection>
   <connection>
-   <sender>buttonBox</sender>
+   <sender>acceptButtonBox</sender>
    <signal>rejected()</signal>
-   <receiver>SearchDatabase</receiver>
+   <receiver>deleteConfirmation</receiver>
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">

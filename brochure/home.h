@@ -26,6 +26,8 @@ public:
     bool AttemptLogin(QString inputPassword, QString inputUserName);
 
     bool createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
+
+    void searchDatabaseResult(QSqlQuery customerFound);
 private slots:
     void on_capability_clicked();
 
@@ -57,12 +59,16 @@ private slots:
 
     void on_printByNameButton_clicked();
 
+    void on_deleteCustomerButton_clicked();
+
 private:
     const int DATA_WIDTH  = 15; //The width of the output data
 
     Ui::MainWindow *ui;
 
     QSqlQuery *databaseQuery;
+
+    QSqlQuery lastCustomerSearched;
 
     QSqlDatabase database;
 
@@ -71,5 +77,7 @@ private:
     const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"};
 
     void printDatabase(QString text, const int NUM_COLUMNS) const;
+
+    void searchDatabasePrompt();
 };
 #endif // MAINWINDOW_H
