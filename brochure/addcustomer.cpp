@@ -1,6 +1,7 @@
 #include "addcustomer.h"
 #include "ui_addcustomer.h"
 #include "home.h"
+#include <QDebug>
 
 addCustomer::addCustomer(MainWindow *window, QWidget *parent) :
     QDialog(parent),
@@ -11,6 +12,51 @@ addCustomer::addCustomer(MainWindow *window, QWidget *parent) :
     home = window;
 
     ui->invalidNameLabel->setVisible(false);
+
+    editMode = false;
+    editName = "";
+}
+
+addCustomer::addCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest, MainWindow *window, QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::addCustomer)
+{
+    ui->setupUi(this);
+
+    home = window;
+
+    ui->invalidNameLabel->setVisible(false);
+
+    ui->inputName->setText(name);
+    ui->inputPhoneNumber->setText(phoneNumber);
+    ui->inputEmail->setText(email);
+    ui->inputBusiness->setText(business);
+
+    if (keyCustomer)
+    {
+        ui->inputKeyCustomer->click();
+    }
+
+    switch (interest)
+    {
+    case NO_INTEREST: ui->noInterestButton->click();
+        break;
+
+    case LOW_INTEREST: ui->lowInterestButton->click();
+        break;
+
+    case MODERATE_INTEREST: ui->moderateInterestButton->click();
+        break;
+
+    case HIGH_INTEREST: ui->highInterestButton->click();
+        break;
+
+    case EXTREMELY_HIGH_INTEREST: ui->extremelyHighInterestButton->click();
+        break;
+    }
+
+    editMode = true;
+    editName = name;
 }
 
 addCustomer::~addCustomer()
@@ -71,13 +117,28 @@ void addCustomer::accept()
            tempInterestLevel = NO_INTEREST;
        }
 
-       if (home->createCustomer(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
+       if (!editMode)
        {
-           done(Accepted);
+           if (home->createCustomer(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
+           {
+               done(Accepted);
+           }
+           else
+           {
+                ui->invalidNameLabel->setVisible(true);
+           }
        }
        else
        {
-            ui->invalidNameLabel->setVisible(true);
+           qDebug() << "about to call editCustomer";
+           if (home->editCustomer(editName, tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
+           {
+               done(Accepted);
+           }
+           else
+           {
+                ui->invalidNameLabel->setVisible(true);
+           }
        }
 
 

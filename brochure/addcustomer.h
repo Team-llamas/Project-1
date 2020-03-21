@@ -14,6 +14,7 @@ class addCustomer : public QDialog
 
 public:
     explicit addCustomer(MainWindow *window, QWidget *parent = 0);
+    explicit addCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest,MainWindow *window, QWidget *parent = 0);
     ~addCustomer();
 
 private slots:
@@ -25,6 +26,10 @@ private:
     Ui::addCustomer *ui;
 
     MainWindow *home;
+
+    bool editMode;
+
+    QString editName;
 };
 
 #endif // ADDCUSTOMER_H

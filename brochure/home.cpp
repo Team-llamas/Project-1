@@ -213,6 +213,78 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
     return uniqueName;
 }
 
+bool MainWindow::editCustomer(QString oldName, QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest)
+{
+    bool uniqueName = true; //A boolean value the keeps of whether or not the name was unique
+
+    databaseQuery->prepare("UPDATE customerList SET name=?, phoneNumber=?, email=?, business=?, keyCustomer=?, interestLevel=? WHERE name=?");
+
+    if (name == "Not Given")
+    {
+        databaseQuery->addBindValue(QVariant(QVariant::String));
+    }
+    else
+    {
+        databaseQuery->addBindValue(name);
+    }
+    databaseQuery->addBindValue(phoneNumber);
+    databaseQuery->addBindValue(email);
+    databaseQuery->addBindValue(business);
+    databaseQuery->addBindValue(keyCustomer);
+
+    qDebug() << interest;
+    switch (interest)
+    {
+    case NO_INTEREST       : databaseQuery->addBindValue("No Interest");
+                             break;
+    case LOW_INTEREST      : databaseQuery->addBindValue("Low Interest");
+                             break;
+    case MODERATE_INTEREST : databaseQuery->addBindValue("Moderate Interest");
+                             break;
+    case HIGH_INTEREST     : databaseQuery->addBindValue("High Interest");
+                             break;
+    case EXTREMELY_HIGH_INTEREST : databaseQuery->addBindValue("Extremely High Interest");
+                                   break;
+
+    }
+
+    databaseQuery->bindValue(6, oldName);
+
+    try
+    {
+        bool check = databaseQuery->exec();
+        if (!check)
+        {
+            qDebug() << databaseQuery->lastError().text();
+
+            throw databaseQuery->lastError();
+        }//end if (!check)
+        else
+        {
+            qDebug() << databaseQuery->lastQuery();
+            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
+            if (databaseQuery->next())
+            {
+                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
+            }//end if (databaseQuery->next())
+        }//end else (if (!checked))
+    }//end try
+    catch (QSqlError error)
+    {
+        if (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row" || error.text() == "NOT NULL constraint failed: customerList.name Unable to fetch row")
+        {
+            uniqueName = false;
+        }//end f (error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row")
+        else
+        {
+            throw error;
+        }
+
+    }//end catch (QsqlError error)
+
+    return uniqueName;
+}
+
 void MainWindow::on_addCustomerButton_clicked()
 {
     addCustomer prompt(this); //The Qdialog that allow the user to input data
@@ -342,4 +414,47 @@ void MainWindow::on_deleteCustomerButton_clicked()
     deleteCustomer.setModal(true);
 
     deleteCustomer.exec();
+}
+
+void MainWindow::on_editDatabaseButton_clicked()
+{
+    searchDatabasePrompt();
+
+    QString tempName        = lastCustomerSearched.value(0).toString(); //The current name of the customer that is being edited
+    QString tempPhoneNumber = lastCustomerSearched.value(1).toString(); //The current phone number of the customer that is being edited
+    QString tempEmail       = lastCustomerSearched.value(2).toString(); //The current email of the customer that is being edited
+    QString tempBusiness    = lastCustomerSearched.value(3).toString(); //The current business of the customer that is being edited
+    bool    tempKeyCustomer = lastCustomerSearched.value(4).toBool();   //A boolean that is true if the customer currently being edited is
+                                                                        //currently a key customer and false otherwise
+    QString interestString  = lastCustomerSearched.value(5).toString(); //A int value represent the current interest level of the customer
+                                                                        //being edited
+
+    interestLevel tempInterest; //The current interest level of the customer that is being edited
+
+    if (interestString == "N0 Interest")
+    {
+        tempInterest = NO_INTEREST;
+    }
+    else if (interestString == "Low Interest")
+    {
+        tempInterest = LOW_INTEREST;
+    }
+    else if (interestString == "Low Interest")
+    {
+        tempInterest = MODERATE_INTEREST;
+    }
+    else if (interestString == "Low Interest")
+    {
+        tempInterest = HIGH_INTEREST;
+    }
+    else if (interestString == "Low Interest")
+    {
+        tempInterest = EXTREMELY_HIGH_INTEREST;
+    }
+
+    addCustomer editCustomerPrompt(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterest, this);
+
+    editCustomerPrompt.setModal(true);
+
+    editCustomerPrompt.exec();
 }

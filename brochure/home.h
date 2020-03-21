@@ -27,6 +27,8 @@ public:
 
     bool createCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
 
+    bool editCustomer(QString oldName, QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
+
     void searchDatabaseResult(QSqlQuery customerFound);
 private slots:
     void on_capability_clicked();
@@ -60,6 +62,8 @@ private slots:
     void on_printByNameButton_clicked();
 
     void on_deleteCustomerButton_clicked();
+
+    void on_editDatabaseButton_clicked();
 
 private:
     const int DATA_WIDTH  = 15; //The width of the output data
