@@ -3,6 +3,7 @@
 #include "addcustomer.h"
 #include "searchdatabase.h"
 #include "deleteconfirmation.h"
+#include "purchaseconfirmation.h"
 #include "ui_home.h"
 #include "QDebug"
 #include <QSqlError>
@@ -32,11 +33,22 @@ MainWindow::MainWindow(QWidget *parent)
 
     databaseQuery = new QSqlQuery;
 
-    bool createTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
+    bool createMainTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
 
-    if (!createTableError)
+    if (!createMainTableError)
     {
         qDebug() << databaseQuery->lastError().text();
+
+        throw databaseQuery->lastError();
+    }
+
+    bool createProductTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS productOrders (name TEXT, basic INT, upgrade INT, deluxe INT, robot INT)");
+
+    if (!createProductTableError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+
+        throw databaseQuery->lastError();
     }
 }
 
@@ -187,15 +199,17 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
 
             throw databaseQuery->lastError();
         }//end if (!check)
-        else
+
+        databaseQuery->prepare("INSERT INTO productOrders (name, basic, upgrade, deluxe, robot) VALUES (?, 0, 0, 0, 0)");
+
+        databaseQuery->bindValue(0, name);
+
+        bool productError = databaseQuery->exec();
+
+        if (!productError)
         {
-            qDebug() << databaseQuery->lastQuery();
-            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
-            if (databaseQuery->next())
-            {
-                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
-            }//end if (databaseQuery->next())
-        }//end else (if (!checked))
+                qDebug() << databaseQuery->lastError().text();
+        }//end if (!productError)
     }//end try
     catch (QSqlError error)
     {
@@ -259,15 +273,20 @@ bool MainWindow::editCustomer(QString oldName, QString name, QString phoneNumber
 
             throw databaseQuery->lastError();
         }//end if (!check)
-        else
+
+        if (name != oldName)
         {
-            qDebug() << databaseQuery->lastQuery();
-            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
-            if (databaseQuery->next())
+            databaseQuery->prepare("UPDATE productOrders SET name=?");
+
+            databaseQuery->bindValue(0, name);
+
+            bool updateProductError = databaseQuery->exec();
+
+            if (!updateProductError)
             {
-                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
-            }//end if (databaseQuery->next())
-        }//end else (if (!checked))
+                qDebug() << databaseQuery->lastError().text();
+            }//end if (!updateProductError)
+        }//end if (name != oldName)
     }//end try
     catch (QSqlError error)
     {
@@ -457,4 +476,81 @@ void MainWindow::on_editDatabaseButton_clicked()
     editCustomerPrompt.setModal(true);
 
     editCustomerPrompt.exec();
+}
+
+void MainWindow::on_buyBasicButton_clicked()
+{
+    searchDatabasePrompt();
+
+    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), BASIC, this);
+
+    confirm.setModal(true);
+
+    confirm.exec();
+}
+
+void MainWindow::buyProduct(QString name, product purchase)
+{
+    databaseQuery->prepare("UPDATE productOrders SET ?=?+1 WHERE name='" + name + "'");
+
+    switch (purchase)
+    {
+    case BASIC: databaseQuery->bindValue(0, "basic");
+                databaseQuery->bindValue(1, "basic");
+        break;
+    case UPGRADE: databaseQuery->bindValue(0, "upgrade");
+                  databaseQuery->bindValue(1, "upgrade");
+        break;
+    case DELUXE: databaseQuery->bindValue(0, "deluxe");
+                 databaseQuery->bindValue(1, "deluxe");
+        break;
+    case IROBOT: databaseQuery->bindValue(0, "robt");
+                 databaseQuery->bindValue(1, "robot");
+        break;
+    }
+
+    bool buyProductError = databaseQuery->exec();
+
+    if (!buyProductError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+    }
+}
+
+void MainWindow::on_pushButton_2_clicked()
+{
+
+}
+
+void MainWindow::on_buyUpgradeButton_clicked()
+{
+    searchDatabasePrompt();
+
+    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), UPGRADE, this);
+
+    confirm.setModal(true);
+
+    confirm.exec();
+}
+
+void MainWindow::on_buyDeluxeButton_clicked()
+{
+    searchDatabasePrompt();
+
+    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), DELUXE, this);
+
+    confirm.setModal(true);
+
+    confirm.exec();
+}
+
+void MainWindow::on_buyIRobotButton_clicked()
+{
+    searchDatabasePrompt();
+
+    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), IROBOT, this);
+
+    confirm.setModal(true);
+
+    confirm.exec();
 }

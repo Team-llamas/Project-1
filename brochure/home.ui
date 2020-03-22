@@ -103,14 +103,14 @@
    <widget class="QStackedWidget" name="Window">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>330</y>
-      <width>841</width>
-      <height>491</height>
+      <x>10</x>
+      <y>340</y>
+      <width>851</width>
+      <height>511</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="header">
@@ -906,7 +906,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>0</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -924,7 +924,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>60</y>
+        <y>40</y>
         <width>241</width>
         <height>221</height>
        </rect>
@@ -948,7 +948,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>60</y>
+        <y>40</y>
         <width>231</width>
         <height>221</height>
        </rect>
@@ -972,7 +972,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>580</x>
-        <y>60</y>
+        <y>40</y>
         <width>241</width>
         <height>221</height>
        </rect>
@@ -996,7 +996,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>20</y>
+        <y>0</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -1014,7 +1014,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>580</x>
-        <y>20</y>
+        <y>0</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -1032,7 +1032,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>580</x>
-        <y>290</y>
+        <y>270</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1051,7 +1051,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>290</y>
+        <y>270</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1070,7 +1070,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>290</y>
+        <y>270</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1084,6 +1084,72 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt;-Humanoid form for ease of use and disguise&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt;-Touchscreen which provides instant feedback for on site usage&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>470</y>
+        <width>761</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="buyBasicButton">
+         <property name="text">
+          <string>Buy Basic</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buyUpgradeButton">
+         <property name="text">
+          <string>Buy Upgrade</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buyDeluxeButton">
+         <property name="text">
+          <string>Buy Deluxe</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buyIRobotButton">
+         <property name="text">
+          <string>Buy IRobot</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="indemnityPage">

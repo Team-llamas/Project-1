@@ -7,6 +7,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include "interestlevel.h"
+#include "productenum.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -30,6 +31,8 @@ public:
     bool editCustomer(QString oldName, QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest);
 
     void searchDatabaseResult(QSqlQuery customerFound);
+
+    void buyProduct(QString name, product purchase);
 private slots:
     void on_capability_clicked();
 
@@ -64,6 +67,16 @@ private slots:
     void on_deleteCustomerButton_clicked();
 
     void on_editDatabaseButton_clicked();
+
+    void on_buyBasicButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_buyUpgradeButton_clicked();
+
+    void on_buyDeluxeButton_clicked();
+
+    void on_buyIRobotButton_clicked();
 
 private:
     const int DATA_WIDTH  = 15; //The width of the output data
