@@ -41,11 +41,20 @@ void deleteConfirmation::on_acceptButtonBox_accepted()
 {
     QString deleteQuery; //The query for deleting the customer
 
-    deleteQuery = "Delete FROM customerList, productOrders WHERE name='" + deleteQuerier.value(0).toString() + "'";
+    deleteQuery = "Delete FROM customerList WHERE name='" + deleteQuerier.value(0).toString() + "'";
 
-    bool deleteError = deleteQuerier.exec(deleteQuery);
+    bool deleteCustomerError = deleteQuerier.exec(deleteQuery);
 
-    if (!deleteError)
+    if (!deleteCustomerError)
+    {
+        qDebug() << deleteQuerier.lastError();
+    }
+
+    deleteQuery = "Delete FROM productOrders WHERE customer='" + deleteQuerier.value(0).toString() + "'";
+
+    bool deleteProductError = deleteQuerier.exec(deleteQuery);
+
+    if (!deleteProductError)
     {
         qDebug() << deleteQuerier.lastError();
     }

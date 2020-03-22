@@ -110,7 +110,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="header">
@@ -876,16 +876,16 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="printKeyByNameButton">
            <property name="text">
-            <string>PushButton</string>
+            <string>Print Key Sort by Name</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="printProductPurchasesButton">
            <property name="text">
-            <string>PushButton</string>
+            <string>Print Product Purchases</string>
            </property>
           </widget>
          </item>

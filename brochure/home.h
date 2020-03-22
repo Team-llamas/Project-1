@@ -78,6 +78,10 @@ private slots:
 
     void on_buyIRobotButton_clicked();
 
+    void on_printKeyByNameButton_clicked();
+
+    void on_printProductPurchasesButton_clicked();
+
 private:
     const int DATA_WIDTH  = 15; //The width of the output data
 

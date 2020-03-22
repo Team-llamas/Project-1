@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent)
         throw databaseQuery->lastError();
     }
 
-    bool createProductTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS productOrders (name TEXT, basic INT, upgrade INT, deluxe INT, robot INT)");
+    bool createProductTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS productOrders (customer TEXT, basic INT, upgrade INT, deluxe INT, robot INT)");
 
     if (!createProductTableError)
     {
@@ -200,7 +200,7 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
             throw databaseQuery->lastError();
         }//end if (!check)
 
-        databaseQuery->prepare("INSERT INTO productOrders (name, basic, upgrade, deluxe, robot) VALUES (?, 0, 0, 0, 0)");
+        databaseQuery->prepare("INSERT INTO productOrders (customer, basic, upgrade, deluxe, robot) VALUES (?, 0, 0, 0, 0)");
 
         databaseQuery->bindValue(0, name);
 
@@ -276,7 +276,7 @@ bool MainWindow::editCustomer(QString oldName, QString name, QString phoneNumber
 
         if (name != oldName)
         {
-            databaseQuery->prepare("UPDATE productOrders SET name=?");
+            databaseQuery->prepare("UPDATE productOrders SET customer=?");
 
             databaseQuery->bindValue(0, name);
 
@@ -357,9 +357,15 @@ void MainWindow::printDatabase(QString text, const int NUM_COLUMNS) const
 
         for (int index = 0; index < NUM_COLUMNS; index++)
         {
+            if (index % 7 == 0 && index != 0)
+            {
+                text.append("\n");
+
+                text.append(QString(" ").rightJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+            }
             text.append(databaseQuery->value(index).toString().leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
         }//end for (int index = 0; index < databaseQuery->size(); index++)
-         text = text + '\n';
+         text.append("\n\n");
      }//end while (databaseQuery->next())
 
      if (empty)
@@ -384,7 +390,7 @@ void MainWindow::on_printByNameButton_clicked()
     bool retrievalSuccessful; //A boolean value to check if the query succeeded
     QString text;             //The QString that is displayed on the text edit
 
-    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList ORDEREDBY name");
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList ORDER BY name");
 
     if (!retrievalSuccessful)
     {
@@ -491,25 +497,23 @@ void MainWindow::on_buyBasicButton_clicked()
 
 void MainWindow::buyProduct(QString name, product purchase)
 {
-    databaseQuery->prepare("UPDATE productOrders SET ?=?+1 WHERE name='" + name + "'");
+    QString purchaseQuery; //A the query being written to record the purchase
+    QString productString; //A string that stores the product the customer in buying
 
     switch (purchase)
     {
-    case BASIC: databaseQuery->bindValue(0, "basic");
-                databaseQuery->bindValue(1, "basic");
+    case BASIC: productString = "basic";
         break;
-    case UPGRADE: databaseQuery->bindValue(0, "upgrade");
-                  databaseQuery->bindValue(1, "upgrade");
+    case UPGRADE: productString = "upgrade";
         break;
-    case DELUXE: databaseQuery->bindValue(0, "deluxe");
-                 databaseQuery->bindValue(1, "deluxe");
+    case DELUXE: productString = "deluxe";
         break;
-    case IROBOT: databaseQuery->bindValue(0, "robt");
-                 databaseQuery->bindValue(1, "robot");
+    case IROBOT: productString = "robot";
         break;
     }
 
-    bool buyProductError = databaseQuery->exec();
+    purchaseQuery = "UPDATE productOrders SET " + productString + "=(" + productString + " + 1) WHERE customer='" + name + "'";
+    bool buyProductError = databaseQuery->exec(purchaseQuery);
 
     if (!buyProductError)
     {
@@ -553,4 +557,78 @@ void MainWindow::on_buyIRobotButton_clicked()
     confirm.setModal(true);
 
     confirm.exec();
+}
+
+void MainWindow::on_printKeyByNameButton_clicked()
+{
+    //constant
+    const int NUM_COLUMNS = 7;  //The number of columns in the database
+
+    //variables
+    bool retrievalSuccessful; //A boolean value to check if the query succeeded
+    QString text;             //The QString that is displayed on the text edit
+
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList WHERE keyCustomer=1 ORDER BY name");
+
+    if (!retrievalSuccessful)
+    {
+         qDebug() << "yep" << endl;
+         QSqlError error = databaseQuery->lastError();
+
+         qDebug() << error.text() << endl;
+
+         throw error;
+    }
+
+    text = "Name";
+    text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+    text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+
+    printDatabase(text, NUM_COLUMNS);
+}
+
+void MainWindow::on_printProductPurchasesButton_clicked()
+{
+    //constant
+    const int NUM_COLUMNS = 12;  //The number of columns in the database
+
+    //variables
+    bool retrievalSuccessful; //A boolean value to check if the query succeeded
+    QString text;             //The QString that is displayed on the text edit
+
+    retrievalSuccessful = databaseQuery->exec("SELECT name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted, basic, upgrade, deluxe, robot, ((200*basic) + (500*upgrade) + (1000*deluxe) + (10000*robot)) FROM customerList INNER JOIN productOrders ON customerList.name=productOrders.customer ORDER BY customerList.name");
+
+    if (!retrievalSuccessful)
+    {
+         QSqlError error = databaseQuery->lastError();
+
+         qDebug() << error.text();
+
+         throw error;
+    }
+
+    text = "Name";
+    text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+    text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+    text.append(QString("Second Level:").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Basic Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Upgrade Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Deluxe Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("IRobot Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Total Cost").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+
+    printDatabase(text, NUM_COLUMNS);
 }
