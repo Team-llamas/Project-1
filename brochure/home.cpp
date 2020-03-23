@@ -776,15 +776,10 @@ bool MainWindow::RequestPamphletCopy(QSqlQuery *databaseQuery, QString name)
 
 void MainWindow::on_PamphletCopy_clicked()
 {
-    QPushButton PamphletCopy;
-
-    QString name;
 
     bool copySuccessful;
 
     searchDatabasePrompt();
-
-    lastCustomerSearched.value(6).toString();
 
     if(!searchDatabaseCancelled)
     {
@@ -800,7 +795,7 @@ void MainWindow::on_PamphletCopy_clicked()
                 qDebug() << databaseQuery->lastError().text();
 
                 qDebug() << databaseQuery->lastQuery();
-          }
+            }
 
         }
         else
@@ -813,4 +808,42 @@ void MainWindow::on_PamphletCopy_clicked()
     {
         searchDatabaseCancelled = false;
     }
+}
+
+void MainWindow::on_SendPamphletButton_clicked()
+{
+    bool copySuccessful;
+
+    searchDatabasePrompt();
+
+    if(!searchDatabaseCancelled)
+    {
+        if(lastCustomerSearched.value(6).toString() == "Yes")
+        {
+            databaseQuery->prepare("UPDATE customerList SET pamphletWanted= 'Already Have' WHERE name=?");
+            databaseQuery->bindValue(0, lastCustomerSearched.value(0).toString());
+            copySuccessful = databaseQuery->exec();
+
+            if (!copySuccessful)
+            {
+                qDebug() << databaseQuery->lastError().text();
+
+                qDebug() << databaseQuery->lastQuery();
+            }
+
+        }
+        else if(lastCustomerSearched.value(6).toString() == "No")
+        {
+            ui->databaseDisplay->setText("Customer didn't request a pamphlet.");
+        }
+        else
+        {
+            ui->databaseDisplay->setText("Customer already has a pamphlet.");
+        }
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
+
 }

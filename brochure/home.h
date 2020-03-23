@@ -374,6 +374,8 @@ private slots:
      */
     void on_printProductPurchasesButton_clicked();
 
+    void on_SendPamphletButton_clicked();
+
 private:
     const int DATA_WIDTH  = 15; //!The width of the output data
 
