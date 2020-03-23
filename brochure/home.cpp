@@ -54,6 +54,8 @@ MainWindow::MainWindow(QWidget *parent)
     }
 
     searchDatabaseCancelled = false;
+
+    ui->RepeatRequest->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -776,5 +778,39 @@ void MainWindow::on_PamphletCopy_clicked()
 {
     QPushButton PamphletCopy;
 
+    QString name;
+
+    bool copySuccessful;
+
     searchDatabasePrompt();
+
+    lastCustomerSearched.value(6).toString();
+
+    if(!searchDatabaseCancelled)
+    {
+
+        if(lastCustomerSearched.value(6).toString() == "No")
+        {
+            databaseQuery->prepare("UPDATE customerList SET pamphletWanted='Yes' WHERE name=?");
+            databaseQuery->bindValue(0, lastCustomerSearched.value(0).toString());
+            copySuccessful = databaseQuery->exec();
+
+            if (!copySuccessful)
+            {
+                qDebug() << databaseQuery->lastError().text();
+
+                qDebug() << databaseQuery->lastQuery();
+          }
+
+        }
+        else
+        {
+            ui->RepeatRequest->setVisible(true);
+        }
+
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
