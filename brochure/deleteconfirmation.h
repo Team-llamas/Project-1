@@ -48,10 +48,10 @@ private slots:
     void on_acceptButtonBox_accepted();
 
 private:
-    Ui::deleteConfirmation *ui; //!Qt's generated ui pointer to access the widgets inside this window
+    Ui::deleteConfirmation *ui; //!<Qt's generated ui pointer to access the widgets inside this window
 
-    QSqlQuery deleteQuerier; //!A QSqlQuery object to write the delete query to the database if the
-                             //!user press ok.
+    QSqlQuery deleteQuerier; //!<A QSqlQuery object to write the delete query to the database if the
+                             //!<user press ok.
 };
 
 #endif // DELETECONFIRMATION_H

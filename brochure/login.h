@@ -54,9 +54,9 @@ private slots:
     void accept();
 
 private:
-    Ui::Login *ui; //!Qt's generated ui pointer to access the widgets inside this window
+    Ui::Login *ui; //!<Qt's generated ui pointer to access the widgets inside this window
 
-   MainWindow *home; //!A pointer back to the main window
+   MainWindow *home; //!<A pointer back to the main window
 };
 
 #endif // LOGIN_H

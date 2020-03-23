@@ -24,6 +24,7 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    MainWindow(const MainWindow& otherWindow);
     /** fn
      * AttemptLogin
      *      This is function will take the user to the admin page if a valid
@@ -427,22 +428,25 @@ private slots:
     void on_SendPamphletButton_clicked();
 
 private:
-    const int DATA_WIDTH  = 15; //!The width of the output data
+    const int DATA_WIDTH  = 15; //!<The width of the output data
 
-    Ui::MainWindow *ui; //!Qt generated ui pointer, for accessing the widgets of the window
+    QWidget *parentPointer; //!<A place to store the parent widget because Qt doesn't allow me to
+                            //!<call the copy constructor of QMainWindow
+
+    Ui::MainWindow *ui; //!<Qt generated ui pointer, for accessing the widgets of the window
 
     QSqlQuery *databaseQuery; //!A pointer to the primary query object for the sql database
 
-    QSqlQuery lastCustomerSearched; //!A QsqlQuery that is used to store the customer found during a search
+    QSqlQuery lastCustomerSearched; //!<A QsqlQuery that is used to store the customer found during a search
 
-    bool searchDatabaseCancelled; //!A bool value that is only true when a search of the database was cancelled
+    bool searchDatabaseCancelled; //!<A bool value that is only true when a search of the database was cancelled
 
-    QSqlDatabase database; //!The database object interfacing with database for this program
+    QSqlDatabase database; //!<The database object interfacing with database for this program
 
-    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"}; //!A const array of all valid admin usernames
+    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"}; //!<A const array of all valid admin usernames
 
-    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"}; //!A const array of all valid admin passwords, positionally corresponding
-                                                                  //!to the array of valid username
+    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"}; //!<A const array of all valid admin passwords, positionally corresponding
+                                                                  //!<to the array of valid username
 
     /** fn
      * printDatabase

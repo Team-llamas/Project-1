@@ -76,14 +76,14 @@ private slots:
     void accept();
 
 private:
-    Ui::addCustomer *ui; //!Qt's generated ui pointer to access the widgets inside this window
+    Ui::addCustomer *ui; //!<Qt's generated ui pointer to access the widgets inside this window
 
-    MainWindow *home; //!A pointer back to the main window
+    MainWindow *home; //!<A pointer back to the main window
 
-    bool editMode; //!A bool value that is true if the user is edit an existing customer and false if the
-                   //!user to creating a new customer
+    bool editMode; //!<A bool value that is true if the user is edit an existing customer and false if the
+                   //!<user to creating a new customer
 
-    QString editName; //!A QString variable to keep track of the name of the customer before their data is editted.
+    QString editName; //!<A QString variable to keep track of the name of the customer before their data is editted.
 };
 
 #endif // ADDCUSTOMER_H

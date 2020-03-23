@@ -47,13 +47,13 @@ private slots:
     void on_confirmationButtonBox_accepted();
 
 private:
-    Ui::purchaseConfirmation *ui; //!Qt's generated ui pointer to access the widgets inside this window
+    Ui::purchaseConfirmation *ui; //!<Qt's generated ui pointer to access the widgets inside this window
 
-    QString customerName; //!The name of the customer making the purchase
+    QString customerName; //!<The name of the customer making the purchase
 
-    product purchase; //!An enum value that state what product the customer is buying
+    product purchase; //!<An enum value that state what product the customer is buying
 
-    MainWindow *home; //!A pointer back to the main window
+    MainWindow *home; //!<A pointer back to the main window
 };
 
 #endif // PURCHASECONFIRMATION_H

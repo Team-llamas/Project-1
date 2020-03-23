@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    parentPointer = parent;
+
     ui->setupUi(this);
 
     ui->BrochureOverview->setHidden(true);
@@ -56,6 +58,18 @@ MainWindow::MainWindow(QWidget *parent)
     searchDatabaseCancelled = false;
 
     ui->RepeatRequest->setVisible(false);
+}
+
+MainWindow::MainWindow(const MainWindow& otherWindow)
+           :QMainWindow(otherWindow.parentPointer)
+{
+    *ui = *(otherWindow.ui);
+
+    *databaseQuery = *databaseQuery;
+
+    searchDatabaseCancelled = false;
+
+    database = otherWindow.database;
 }
 
 MainWindow::~MainWindow()

@@ -63,9 +63,9 @@ private slots:
     void on_buttonBox_rejected();
 
 private:
-    Ui::SearchDatabase *ui; //!Qt's generated ui pointer to access the widgets inside this window
+    Ui::SearchDatabase *ui; //!<Qt's generated ui pointer to access the widgets inside this window
 
-    MainWindow *window; //!A pointer back to the main window
+    MainWindow *window; //!<A pointer back to the main window
 };
 
 #endif // SEARCHDATABASE_H
