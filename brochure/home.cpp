@@ -687,7 +687,7 @@ bool MainWindow::RequestPamphletCopy(QSqlQuery *databaseQuery, QString name)
 {
    bool onList = true;
 
-   databaseQuery->prepare("UPDATE customerList SET name=?");
+   databaseQuery->prepare("UPDATE customerList SET PamphletWanted = 'Yes' WHERE name=?");
 
     if(name == "Yes")
     {
@@ -751,4 +751,14 @@ void MainWindow::on_PamphletCopy_clicked()
     QPushButton PamphletCopy;
 
     searchDatabasePrompt();
+
+    if(!searchDatabaseCancelled)
+    {
+        ui->Window->setCurrentIndex(0);
+        addCustomer()
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }

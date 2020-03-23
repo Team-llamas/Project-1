@@ -54,9 +54,9 @@
   <widget class="QLabel" name="notFoundLabel">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>20</x>
      <y>20</y>
-     <width>331</width>
+     <width>361</width>
      <height>17</height>
     </rect>
    </property>
@@ -65,7 +65,7 @@
 color: rgb(255, 0, 0);</string>
    </property>
    <property name="text">
-    <string>That customer was not found in the database</string>
+    <string>Customer not found. Enter name in administrator database.</string>
    </property>
   </widget>
  </widget>
