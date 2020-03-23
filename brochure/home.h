@@ -7,6 +7,7 @@
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include "interestlevel.h"
+#include "productenum.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -32,6 +33,10 @@ public:
     void searchDatabaseResult(QSqlQuery customerFound);
 
     bool RequestPamphletCopy(QSqlQuery *databaseQuery, QString name);
+
+    void searchDatabaseCancel();
+
+    void buyProduct(QString name, product purchase);
 
 private slots:
     void on_capability_clicked();
@@ -71,22 +76,67 @@ private slots:
     void on_PamphletCopy_clicked();
 
 private:
-    const int DATA_WIDTH  = 15; //The width of the output data
 
-    Ui::MainWindow *ui;
+    void on_buyBasicButton_clicked();
 
-    QSqlQuery *databaseQuery;
+    void on_pushButton_2_clicked();
 
-    QSqlQuery lastCustomerSearched;
+    void on_buyUpgradeButton_clicked();
 
-    QSqlDatabase database;
+    void on_buyDeluxeButton_clicked();
 
-    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"};
+    void on_buyIRobotButton_clicked();
 
-    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"};
+    void on_printKeyByNameButton_clicked();
 
+    void on_printProductPurchasesButton_clicked();
+
+private:
+    const int DATA_WIDTH  = 15; //!The width of the output data
+
+    Ui::MainWindow *ui; //!Qt generated ui pointer, for accessing the widgets of the window
+
+    QSqlQuery *databaseQuery; //!A pointer to the primary query object for the sql database
+
+    QSqlQuery lastCustomerSearched; //!A QsqlQuery that is used to store the customer found during a search
+
+    bool searchDatabaseCancelled; //!A bool value that is only true when a search of the database was cancelled
+
+    QSqlDatabase database; //!The database object interfacing with database for this program
+
+    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"}; //!A const array of all valid admin usernames
+
+    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"}; //!A const array of all valid admin passwords, positionally corresponding
+                                                                  //!to the array of valid username
+
+    /** fn
+     * printDatabase
+     *      Use to print out the database to the databaseDisplay QTextEdit after executing a SELECT query to retrieve the
+     *      data that is intended to be printed out
+     *
+     * Precondition:
+     *      A SELECT was executed through databaseQuery to retrieve the data that is to be printed out, and
+     *      any type of header is prepare BEFORE calling this function
+     *
+     *      pass in QString text, const int NUM_COLUMNS
+     *          QString text - The QString that will be displayed in databaseDisplay, this QString should
+     *                         contain the header of the data with a /n at the end when calling the function
+     *
+     *          const int NUM_COLUMNS - A int value that tells printDatabase how many columns of data is being
+     *                                  printed out.
+     *
+     * Postcondition:
+     *      The data is appended to text in a formatted then text is displayed in databaseDisplay
+     */
     void printDatabase(QString text, const int NUM_COLUMNS) const;
 
+    /** fn
+     * searchDatabasePrompt
+     *      Use this function to begin a search of the database
+     *
+     * Precondition:
+     *
+     */
     void searchDatabasePrompt();
 };
 #endif // MAINWINDOW_H

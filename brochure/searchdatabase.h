@@ -20,6 +20,8 @@ private slots:
     void on_buttonBox_accepted();
 
     void accept();
+    void on_buttonBox_rejected();
+
 private:
     Ui::SearchDatabase *ui;
 

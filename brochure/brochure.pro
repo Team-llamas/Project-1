@@ -22,7 +22,8 @@ SOURCES += \
     main.cpp \
     searchdatabase.cpp \
     addcustomer.cpp \
-    deleteconfirmation.cpp
+    deleteconfirmation.cpp \
+    purchaseconfirmation.cpp
 
 HEADERS += \
     home.h \
@@ -30,14 +31,17 @@ HEADERS += \
     searchdatabase.h \
     addcustomer.h \
     interestlevel.h \
-    deleteconfirmation.h
+    deleteconfirmation.h \
+    purchaseconfirmation.h \
+    productenum.h
 
 FORMS += \
     home.ui \
     login.ui \
     searchdatabase.ui \
     addcustomer.ui \
-    deleteconfirmation.ui
+    deleteconfirmation.ui \
+    purchaseconfirmation.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

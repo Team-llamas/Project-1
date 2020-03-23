@@ -17,7 +17,7 @@ addCustomer::addCustomer(MainWindow *window, QWidget *parent) :
     editName = "";
 }
 
-addCustomer::addCustomer(QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest, MainWindow *window, QWidget *parent) :
+addCustomer::addCustomer(QString name, QString address, QString email, QString business, bool keyCustomer, interestLevel interest, MainWindow *window, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::addCustomer)
 {
@@ -28,7 +28,7 @@ addCustomer::addCustomer(QString name, QString phoneNumber, QString email, QStri
     ui->invalidNameLabel->setVisible(false);
 
     ui->inputName->setText(name);
-    ui->inputPhoneNumber->setText(phoneNumber);
+    ui->inputAddress->setText(address);
     ui->inputEmail->setText(email);
     ui->inputBusiness->setText(business);
 
@@ -67,7 +67,7 @@ addCustomer::~addCustomer()
 void addCustomer::accept()
 {
        QString tempName        = ui->inputName->text();        //The name of the customer
-       QString tempPhoneNumber = ui->inputPhoneNumber->text(); //The phone number of the customer
+       QString tempAddress     = ui->inputAddress->text();     //The phone number of the customer
        QString tempEmail       = ui->inputEmail->text();       //The email of the customer
        QString tempBusiness    = ui->inputBusiness->text();    //The business the customer belongs to
        bool    tempKeyCustomer = ui->inputKeyCustomer->isChecked(); //A bool value stating whether or not this
@@ -81,9 +81,9 @@ void addCustomer::accept()
            tempName = "Not Given";
        }
 
-       if (tempPhoneNumber == "")
+       if (tempAddress == "")
        {
-           tempPhoneNumber = "Not Given";
+           tempAddress = "Not Given";
        }
 
        if (tempEmail == "")
@@ -119,7 +119,7 @@ void addCustomer::accept()
 
        if (!editMode)
        {
-           if (home->createCustomer(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
+           if (home->createCustomer(tempName, tempAddress, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
            {
                done(Accepted);
            }
@@ -131,7 +131,7 @@ void addCustomer::accept()
        else
        {
            qDebug() << "about to call editCustomer";
-           if (home->editCustomer(editName, tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
+           if (home->editCustomer(editName, tempName, tempAddress, tempEmail, tempBusiness, tempKeyCustomer, tempInterestLevel))
            {
                done(Accepted);
            }

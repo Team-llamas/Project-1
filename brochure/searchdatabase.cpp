@@ -53,3 +53,8 @@ void SearchDatabase::accept()
     }
 
 }
+
+void SearchDatabase::on_buttonBox_rejected()
+{
+    window->searchDatabaseCancel();
+}

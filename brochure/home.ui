@@ -196,7 +196,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/michael-dam-mEZ3PoFGs_k-unsplash.jpg</pixmap>
+       <pixmap>:/pics/michael-dam-mEZ3PoFGs_k-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -215,7 +215,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/hayley-wagner-7UIpoiARc_8-unsplash.jpg</pixmap>
+       <pixmap>:/pics/hayley-wagner-7UIpoiARc_8-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -234,7 +234,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/anjo-clacino-YIMASa67nKU-unsplash.jpg</pixmap>
+       <pixmap>:/pics/anjo-clacino-YIMASa67nKU-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -314,7 +314,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/fatma-hatam-6-p_qnVa3zU-unsplash.jpg</pixmap>
+       <pixmap>:/pics/fatma-hatam-6-p_qnVa3zU-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -333,7 +333,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/keri-liwi-SSXCiGKYQQE-unsplash.jpg</pixmap>
+       <pixmap>:/pics/keri-liwi-SSXCiGKYQQE-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -352,7 +352,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/xtra-inc-bhXQcYqH4fc-unsplash.jpg</pixmap>
+       <pixmap>:/pics/xtra-inc-bhXQcYqH4fc-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -445,7 +445,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/pokemon-go-egg.jpg</pixmap>
+       <pixmap>:/pics/pokemon-go-egg.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -485,7 +485,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/omelette.jpeg</pixmap>
+       <pixmap>:/pics/omelette.jpeg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -504,7 +504,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/sunny-egg.jpg</pixmap>
+       <pixmap>:/pics/sunny-egg.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -621,7 +621,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/anjo-clacino-YIMASa67nKU-unsplash.jpg</pixmap>
+       <pixmap>:/pics/anjo-clacino-YIMASa67nKU-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -692,7 +692,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/hayley-wagner-7UIpoiARc_8-unsplash.jpg</pixmap>
+       <pixmap>:/pics/hayley-wagner-7UIpoiARc_8-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -729,7 +729,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/michael-dam-mEZ3PoFGs_k-unsplash.jpg</pixmap>
+       <pixmap>:/pics/michael-dam-mEZ3PoFGs_k-unsplash.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -802,7 +802,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/Robot_Project-1.jpg</pixmap>
+       <pixmap>:/pics/Robot_Project-1.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -980,7 +980,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/mediumRobot.jpg</pixmap>
+       <pixmap>:/pics/mediumRobot.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -1004,7 +1004,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/roomba.jpg</pixmap>
+       <pixmap>:/pics/roomba.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -1028,7 +1028,7 @@ p, li { white-space: pre-wrap; }
        <string/>
       </property>
       <property name="pixmap">
-       <pixmap resource="images.qrc">:/pics/terminator.jpg</pixmap>
+       <pixmap>:/pics/terminator.jpg</pixmap>
       </property>
       <property name="scaledContents">
        <bool>true</bool>
@@ -1197,7 +1197,7 @@ p, li { white-space: pre-wrap; }
      <string/>
     </property>
     <property name="pixmap">
-     <pixmap resource="images.qrc">:/pics/science-in-hd-1WBN-JKSmKI-unsplash.jpg</pixmap>
+     <pixmap>:/pics/science-in-hd-1WBN-JKSmKI-unsplash.jpg</pixmap>
     </property>
     <property name="scaledContents">
      <bool>true</bool>
@@ -1273,8 +1273,6 @@ p, li { white-space: pre-wrap; }
    </property>
   </widget>
  </widget>
- <resources>
-  <include location="images.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

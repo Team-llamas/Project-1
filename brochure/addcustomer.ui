@@ -49,9 +49,9 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="phoneNumberLabel">
+       <widget class="QLabel" name="AddressLabel">
         <property name="text">
-         <string>Phone Number:</string>
+         <string>Address:</string>
         </property>
        </widget>
       </item>
@@ -84,7 +84,7 @@
        <widget class="QLineEdit" name="inputName"/>
       </item>
       <item>
-       <widget class="QLineEdit" name="inputPhoneNumber"/>
+       <widget class="QLineEdit" name="inputAddress"/>
       </item>
       <item>
        <widget class="QLineEdit" name="inputEmail"/>
