@@ -32,6 +32,8 @@ public:
 
     void searchDatabaseResult(QSqlQuery customerFound);
 
+    void searchDatabaseCancel();
+
     void buyProduct(QString name, product purchase);
 private slots:
     void on_capability_clicked();
@@ -83,22 +85,51 @@ private slots:
     void on_printProductPurchasesButton_clicked();
 
 private:
-    const int DATA_WIDTH  = 15; //The width of the output data
+    const int DATA_WIDTH  = 15; //!The width of the output data
 
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui; //!Qt generated ui pointer, for accessing the widgets of the window
 
-    QSqlQuery *databaseQuery;
+    QSqlQuery *databaseQuery; //!A pointer to the primary query object for the sql database
 
-    QSqlQuery lastCustomerSearched;
+    QSqlQuery lastCustomerSearched; //!A QsqlQuery that is used to store the customer found during a search
 
-    QSqlDatabase database;
+    bool searchDatabaseCancelled; //!A bool value that is only true when a search of the database was cancelled
 
-    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"};
+    QSqlDatabase database; //!The database object interfacing with database for this program
 
-    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"};
+    const QString VALID_PASSWORD[VAILD_ACCOUNT_SIZE] = {"World"}; //!A const array of all valid admin usernames
 
+    const QString VALID_USERNAME[VAILD_ACCOUNT_SIZE] = {"Hello"}; //!A const array of all valid admin passwords, positionally corresponding
+                                                                  //!to the array of valid username
+
+    /** fn
+     * printDatabase
+     *      Use to print out the database to the databaseDisplay QTextEdit after executing a SELECT query to retrieve the
+     *      data that is intended to be printed out
+     *
+     * Precondition:
+     *      A SELECT was executed through databaseQuery to retrieve the data that is to be printed out, and
+     *      any type of header is prepare BEFORE calling this function
+     *
+     *      pass in QString text, const int NUM_COLUMNS
+     *          QString text - The QString that will be displayed in databaseDisplay, this QString should
+     *                         contain the header of the data with a /n at the end when calling the function
+     *
+     *          const int NUM_COLUMNS - A int value that tells printDatabase how many columns of data is being
+     *                                  printed out.
+     *
+     * Postcondition:
+     *      The data is appended to text in a formatted then text is displayed in databaseDisplay
+     */
     void printDatabase(QString text, const int NUM_COLUMNS) const;
 
+    /** fn
+     * searchDatabasePrompt
+     *      Use this function to begin a search of the database
+     *
+     * Precondition:
+     *
+     */
     void searchDatabasePrompt();
 };
 #endif // MAINWINDOW_H

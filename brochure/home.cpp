@@ -50,6 +50,8 @@ MainWindow::MainWindow(QWidget *parent)
 
         throw databaseQuery->lastError();
     }
+
+    searchDatabaseCancelled = false;
 }
 
 MainWindow::~MainWindow()
@@ -445,69 +447,87 @@ void MainWindow::searchDatabaseResult(QSqlQuery customerFound)
     lastCustomerSearched = customerFound;
 }
 
+void MainWindow::searchDatabaseCancel()
+{
+    searchDatabaseCancelled = true;
+}
 
 void MainWindow::on_deleteCustomerButton_clicked()
 {
     searchDatabasePrompt();
 
-    deleteConfirmation deleteCustomer(lastCustomerSearched);
+    if (!searchDatabaseCancelled)
+    {
+        deleteConfirmation deleteCustomer(lastCustomerSearched);
 
-    deleteCustomer.setModal(true);
+        deleteCustomer.setModal(true);
 
-    deleteCustomer.exec();
+        deleteCustomer.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
 
 void MainWindow::on_editDatabaseButton_clicked()
 {
     searchDatabasePrompt();
 
-    QString tempName          = lastCustomerSearched.value(0).toString(); //The current name of the customer that is being edited
-    QString tempPhoneNumber   = lastCustomerSearched.value(1).toString(); //The current phone number of the customer that is being edited
-    QString tempEmail         = lastCustomerSearched.value(2).toString(); //The current email of the customer that is being edited
-    QString tempBusiness      = lastCustomerSearched.value(3).toString(); //The current business of the customer that is being edited
-    QString keyCustomerString = lastCustomerSearched.value(4).toString(); //Whether or not the customer is a key customer
-    QString interestString    = lastCustomerSearched.value(5).toString(); //A int value represent the current interest level of the customer
-                                                                          //being edited
-
-    bool tempKeyCustomer; //A bool value that true if the customer is a key customer and false otherwise
-
-    interestLevel tempInterest; //The current interest level of the customer that is being edited
-
-    if (keyCustomerString == "Key")
+    if (!searchDatabaseCancelled)
     {
-        tempKeyCustomer = true;
-    }
+        QString tempName          = lastCustomerSearched.value(0).toString(); //The current name of the customer that is being edited
+        QString tempPhoneNumber   = lastCustomerSearched.value(1).toString(); //The current phone number of the customer that is being edited
+        QString tempEmail         = lastCustomerSearched.value(2).toString(); //The current email of the customer that is being edited
+        QString tempBusiness      = lastCustomerSearched.value(3).toString(); //The current business of the customer that is being edited
+        QString keyCustomerString = lastCustomerSearched.value(4).toString(); //Whether or not the customer is a key customer
+        QString interestString    = lastCustomerSearched.value(5).toString(); //A int value represent the current interest level of the customer
+                                                                              //being edited
+
+        bool tempKeyCustomer; //A bool value that true if the customer is a key customer and false otherwise
+
+        interestLevel tempInterest; //The current interest level of the customer that is being edited
+
+        if (keyCustomerString == "Key")
+        {
+            tempKeyCustomer = true;
+        }
+        else
+        {
+            tempKeyCustomer = false;
+        }
+
+        if (interestString == "No Interest")
+        {
+            tempInterest = NO_INTEREST;
+        }
+        else if (interestString == "Low Interest")
+        {
+            tempInterest = LOW_INTEREST;
+        }
+        else if (interestString == "Moderate Interest")
+        {
+            tempInterest = MODERATE_INTEREST;
+        }
+        else if (interestString == "High Interest")
+        {
+            tempInterest = HIGH_INTEREST;
+        }
+        else if (interestString == "Extremely High Interest")
+        {
+            tempInterest = EXTREMELY_HIGH_INTEREST;
+        }
+
+        addCustomer editCustomerPrompt(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterest, this);
+
+        editCustomerPrompt.setModal(true);
+
+        editCustomerPrompt.exec();
+    }//end if (!searchDatabaseCancelled)
     else
     {
-        tempKeyCustomer = false;
-    }
-
-    if (interestString == "No Interest")
-    {
-        tempInterest = NO_INTEREST;
-    }
-    else if (interestString == "Low Interest")
-    {
-        tempInterest = LOW_INTEREST;
-    }
-    else if (interestString == "Moderate Interest")
-    {
-        tempInterest = MODERATE_INTEREST;
-    }
-    else if (interestString == "High Interest")
-    {
-        tempInterest = HIGH_INTEREST;
-    }
-    else if (interestString == "Extremely High Interest")
-    {
-        tempInterest = EXTREMELY_HIGH_INTEREST;
-    }
-
-    addCustomer editCustomerPrompt(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterest, this);
-
-    editCustomerPrompt.setModal(true);
-
-    editCustomerPrompt.exec();
+        searchDatabaseCancelled = false;
+    }//end else (if (!searchDatabaseCancelled))
 }
 
 void MainWindow::on_buyBasicButton_clicked()
