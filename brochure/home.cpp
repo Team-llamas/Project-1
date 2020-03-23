@@ -489,12 +489,38 @@ bool MainWindow::RequestPamphletCopy(QSqlQuery *databaseQuery, QString name)
     else
     {
         qDebug() << "Customer not found. Please enter name in administrator database." << endl;
+    }
 
-        QSqlError error = databaseQuery->lastError();
+    try
+    {
+        bool check = databaseQuery->exec();
+        if (!check)
+        {
+            qDebug() << databaseQuery->lastError().text();
 
-        qDebug() << error.text() << endl;
+            throw databaseQuery->lastError();
+        }//end if (!check)
+        else
+        {
+            qDebug() << databaseQuery->lastQuery();
+            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
+            if (databaseQuery->next())
+            {
+                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
+            }//end if (databaseQuery->next())
+        }//end else (if (!checked))
+    }//end try
 
-        throw error;
+    catch(QSqlError error)
+    {
+        if(error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row" || error.text() == "NOT NULL constraint failed: customerList.name Unable to fetch row")
+        {
+            onList = false;
+        }
+        else
+        {
+            throw error;
+        }
     }
 
     return onList;
