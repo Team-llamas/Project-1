@@ -115,6 +115,8 @@ public:
      */
     void searchDatabaseResult(QSqlQuery customerFound);
 
+    bool RequestPamphletCopy(QSqlQuery *databaseQuery, QString name);
+
     /** fn
      * searchDatabaseCancel
      *      This function tells MainWindow that a database search was cancelled.
@@ -306,6 +308,8 @@ private slots:
      *      The user is taken to the capability page
      */
     void on_editDatabaseButton_clicked();
+
+    void on_PamphletCopy_clicked();
 
     /** fn
      * on_capability_clicked
