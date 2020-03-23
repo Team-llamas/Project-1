@@ -646,7 +646,7 @@ void MainWindow::on_printKeyByNameButton_clicked()
     bool retrievalSuccessful; //A boolean value to check if the query succeeded
     QString text;             //The QString that is displayed on the text edit
 
-    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList WHERE keyCustomer=1 ORDER BY name");
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList WHERE keyCustomer='Key' ORDER BY name");
 
     if (!retrievalSuccessful)
     {
@@ -680,7 +680,7 @@ void MainWindow::on_printProductPurchasesButton_clicked()
     bool retrievalSuccessful; //A boolean value to check if the query succeeded
     QString text;             //The QString that is displayed on the text edit
 
-    retrievalSuccessful = databaseQuery->exec("SELECT name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted, basic, upgrade, deluxe, robot, ((200*basic) + (500*upgrade) + (1000*deluxe) + (10000*robot)) FROM customerList INNER JOIN productOrders ON customerList.name=productOrders.customer ORDER BY customerList.name");
+    retrievalSuccessful = databaseQuery->exec("SELECT name, address, email, business, keyCustomer, interestLevel, pamphletWanted, basic, upgrade, deluxe, robot, ((200*basic) + (500*upgrade) + (1000*deluxe) + (10000*robot)) FROM customerList INNER JOIN productOrders ON customerList.name=productOrders.customer ORDER BY customerList.name");
 
     if (!retrievalSuccessful)
     {
@@ -786,6 +786,8 @@ void MainWindow::on_PamphletCopy_clicked()
 
         if(lastCustomerSearched.value(6).toString() == "No")
         {
+            ui->RepeatRequest->setVisible(false);
+
             databaseQuery->prepare("UPDATE customerList SET pamphletWanted='Yes' WHERE name=?");
             databaseQuery->bindValue(0, lastCustomerSearched.value(0).toString());
             copySuccessful = databaseQuery->exec();

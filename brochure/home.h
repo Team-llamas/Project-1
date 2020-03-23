@@ -214,11 +214,8 @@ private slots:
     void on_maint_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
-     *
-     * Postcondition:
-     *      The user is taken to the capability page
+     * This is a dead function that cannot be remove without creating a compile-time error,
+     * but will never be called.
      */
     void on_pushButton_clicked();
 
@@ -260,120 +257,173 @@ private slots:
      *      An instance of addCustomer is created and Display in order to prompt the user input data to
      *      create a new customer with. If the user is able to successfully create a new customer then
      *      that customer will be inserted into both the customerList table and the productOrders table.
-     *      I
+     *      If the user cancels the create customer process then they are returned to mainWindow with no
+     *      other processing done.
      */
     void on_addCustomerButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_printDatabase_clicked
+     *      This is the slot that is executed when the print unsorted database button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The entire customerList table is retrieved with a SELECT query and is printed to databaseDisplay
+     *      using printDatabase.
      */
     void on_pushButton_8_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_clearButton_clicked
+     *      This is the slot that is executed when the clear button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The text being displayed in databaseDisplay is set to an empty string.
      */
     void on_clearButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_printByNameButton_clicked
+     *      This is the slot that is executed when the print sorted by name button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The entire customerList table is retrieved and sorted with a SELECT ORDER BY query and is
+     *      printed to databaseDisplay using printDatabase.
      */
     void on_printByNameButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_deleteCustomerButton_clicked
+     *      This is the slot that is executed when the delete customer button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The searchDatabasePrompt function is used to search the database for the customer that is to
+     *      be deleted. If the customer is found then an instance of deleteConfirmation is created and
+     *      displayed in order to confirm the user is deleting the correct customer. This window will diplay
+     *      to entire row in customerList that represents the customer. If the user confrim that they want to
+     *      delete this user then the row will be deleted from customerList and it corresponding row in the
+     *      productOrders table will also be deleted. If the user decides not the delete the user, then the
+     *      user will return to the main window and no other processing will be done.
      */
     void on_deleteCustomerButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_editDatabaseButton_clicked
+     *      This is the slot that is executed when the edit database button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The searchDatabasePrompt function is used to search the database for the customer that is to
+     *      be editted. If the customer is found then an instance of addCustomer is created using the second
+     *      constructor and is displayed. This will display the window in edit mode, which current info of the
+     *      customer already fills the data fields and the updated data is use to edit the customer instead of
+     *      creating a new one.
      */
     void on_editDatabaseButton_clicked();
 
+    /** fn
+     * on_PamphletCopy_clicked
+     *      This is the slot that is executed when the pamphlet copy button is clicked
+     *
+     * Postcondition:
+     *      The searchDatabasePrompt function is used to search the database for the customer requesting a
+     *      pamphlet. If the customer is found and they have never requested a pamphlet before, then the database
+     *      is update to show that they have requested a pamphlet ("No" is change to "Yes" in pamphletWanted column
+     *      of the customerList table). If the customer is found and they have requested a pamphlet (this could mean
+     *      they are currently waiting for a pamphlet or already have one), then and error message is displayed saying
+     *      that they have requested a pamphlet.
+     */
     void on_PamphletCopy_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_buyBasicButton_clicked
+     *      This is the slot that is executed when the buy basic button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The searchDatabasePrompt function is used to search database for the customer buying the basic maintance plan
+     *      product. If the customer is found then an instance of purchaseConfirmation is created and diplayed in order to
+     *      the customer that this is the product they want to buy. If they click cancel then they are returned to the main
+     *      window and no other processing is done. If they click ok then the productOrders table to updated to show that they
+     *      have bought a basic maintance plan.
      */
     void on_buyBasicButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
-     *
-     * Postcondition:
-     *      The user is taken to the capability page
+     * This is a dead function that cannot be remove without creating a compile-time error,
+     * but will never be called.
      */
     void on_pushButton_2_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_buyUpgradeButton_clicked
+     *      This is the slot that is executed when the buy upgrade button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The searchDatabasePrompt function is used to search database for the customer buying the upgrade maintance plan
+     *      product. If the customer is found then an instance of purchaseConfirmation is created and diplayed in order to
+     *      the customer that this is the product they want to buy. If they click cancel then they are returned to the main
+     *      window and no other processing is done. If they click ok then the productOrders table to updated to show that they
+     *      have bought a upgrade maintance plan.
      */
     void on_buyUpgradeButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_buyDeluxeButton_clicked
+     *      This is the slot that is executed when the buy deluxe button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The searchDatabasePrompt function is used to search database for the customer buying the deluxe maintance plan
+     *      product. If the customer is found then an instance of purchaseConfirmation is created and diplayed in order to
+     *      the customer that this is the product they want to buy. If they click cancel then they are returned to the main
+     *      window and no other processing is done. If they click ok then the productOrders table to updated to show that they
+     *      have bought a deluxe maintance plan.
      */
     void on_buyDeluxeButton_clicked();
-
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_buyIRobotButton_clicked
+     *      This is the slot that is executed when the buy Irobot button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The searchDatabasePrompt function is used to search database for the customer buying the bomb detecting IRobot
+     *      product. If the customer is found then an instance of purchaseConfirmation is created and diplayed in order to
+     *      the customer that this is the product they want to buy. If they click cancel then they are returned to the main
+     *      window and no other processing is done. If they click ok then the productOrders table to updated to show that they
+     *      have bought a the bomb detecting IRobot.
      */
     void on_buyIRobotButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_printKeyByNameButton_clicked
+     *      This is the slot that is executed when the print key sorted by name button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The key customer in the customerList table is retrieved and sorted with a SELECT WHERE ORDER BY query and is
+     *      printed to databaseDisplay using printDatabase.
      */
     void on_printKeyByNameButton_clicked();
 
     /** fn
-     * on_capability_clicked
-     *      This is the slot that is executed when the capability button is clicked
+     * on_printProductPurchasesButton_clicked
+     *      This is the slot that is executed when the print purchases button is clicked
      *
      * Postcondition:
-     *      The user is taken to the capability page
+     *      The entire customerList and productOrders tables is retrieved and sorted with a SELECT JOIN ORDER BY query and is
+     *      printed to databaseDisplay using printDatabase.
      */
     void on_printProductPurchasesButton_clicked();
 
+    /** fn
+     * on_PamphletCopy_clicked
+     *      This is the slot that is executed when the send pamphlet button is clicked
+     *
+     * Postcondition:
+     *      The searchDatabasePrompt function is used to search the database for the customer the pamphlet is being
+     *      sent to. If the customer is found and they have requested a pamphlet, but have not recieve one, then the
+     *      database is update to show that they have recieve a pamphlet ("Yes" is change to "Already Have" in
+     *      pamphletWanted column of the customerList table). If the customer is found and they have  not requested a
+     *      pamphlet, then an error message is displayed in databaseDisplay telling the that the customer has not
+     *      requested pamphlet and no other processing is done. If the customer is found and they already have a pamphlet,
+     *      then an error message is display in databaseDisplay telling the user that the customer already have a pamphlet
+     *       and no other processing is done.
+     */
     void on_SendPamphletButton_clicked();
 
 private:
