@@ -3,6 +3,7 @@
 #include "addcustomer.h"
 #include "searchdatabase.h"
 #include "deleteconfirmation.h"
+#include "purchaseconfirmation.h"
 #include "ui_home.h"
 #include "QDebug"
 #include <QSqlError>
@@ -32,18 +33,27 @@ MainWindow::MainWindow(QWidget *parent)
 
     databaseQuery = new QSqlQuery;
 
-    bool createTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, phoneNumber TEXT, email TEXT, business TEXT, keyCustomer INT, interestLevel TEXT, pamphletWanted TEXT)");
+    bool createMainTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, address TEXT, email TEXT, business TEXT, keyCustomer TEXT, interestLevel TEXT, pamphletWanted TEXT)");
 
-    if (!createTableError)
+    if (!createMainTableError)
     {
         qDebug() << databaseQuery->lastError().text();
+
+        throw databaseQuery->lastError();
     }
-
-
-    searchDatabaseResult(lastCustomerSearched);
 
      ui->PamphletCopy->setHidden(false);
 
+    bool createProductTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS productOrders (customer TEXT, basic INT, upgrade INT, deluxe INT, robot INT)");
+
+    if (!createProductTableError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+
+        throw databaseQuery->lastError();
+    }
+
+    searchDatabaseCancelled = false;
 }
 
 MainWindow::~MainWindow()
@@ -150,34 +160,42 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
 {
     bool uniqueName = true; //A boolean value the keeps of whether or not the name was unique
 
-    databaseQuery->prepare("INSERT INTO customerList (name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted) "
+    databaseQuery->prepare("INSERT INTO customerList (name, address, email, business, keyCustomer, interestLevel, pamphletWanted) "
                            "VALUES (?, ?, ?, ?, ?, ?, ?)");
 
     if (name == "Not Given")
     {
-        databaseQuery->addBindValue(QVariant(QVariant::String));
+        databaseQuery->bindValue(0, QVariant(QVariant::String));
     }
     else
     {
-        databaseQuery->addBindValue(name);
+        databaseQuery->bindValue(0, name);
     }
-    databaseQuery->addBindValue(phoneNumber);
-    databaseQuery->addBindValue(email);
-    databaseQuery->addBindValue(business);
-    databaseQuery->addBindValue(keyCustomer);
+    databaseQuery->bindValue(1, phoneNumber);
+    databaseQuery->bindValue(2, email);
+    databaseQuery->bindValue(3, business);
+
+    if (keyCustomer)
+    {
+        databaseQuery->bindValue(4, "Key");
+    }
+    else
+    {
+        databaseQuery->bindValue(4, "Nice to Have");
+    }
 
     qDebug() << interest;
     switch (interest)
     {
-    case NO_INTEREST       : databaseQuery->addBindValue("No Interest");
+    case NO_INTEREST       : databaseQuery->bindValue(5, "No Interest");
                              break;
-    case LOW_INTEREST      : databaseQuery->addBindValue("Low Interest");
+    case LOW_INTEREST      : databaseQuery->bindValue(5, "Low Interest");
                              break;
-    case MODERATE_INTEREST : databaseQuery->addBindValue("Moderate Interest");
+    case MODERATE_INTEREST : databaseQuery->bindValue(5, "Moderate Interest");
                              break;
-    case HIGH_INTEREST     : databaseQuery->addBindValue("High Interest");
+    case HIGH_INTEREST     : databaseQuery->bindValue(5, "High Interest");
                              break;
-    case EXTREMELY_HIGH_INTEREST : databaseQuery->addBindValue("Extremely High Interest");
+    case EXTREMELY_HIGH_INTEREST : databaseQuery->bindValue(5, "Extremely High Interest");
                                    break;
 
     }
@@ -193,15 +211,17 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
 
             throw databaseQuery->lastError();
         }//end if (!check)
-        else
+
+        databaseQuery->prepare("INSERT INTO productOrders (customer, basic, upgrade, deluxe, robot) VALUES (?, 0, 0, 0, 0)");
+
+        databaseQuery->bindValue(0, name);
+
+        bool productError = databaseQuery->exec();
+
+        if (!productError)
         {
-            qDebug() << databaseQuery->lastQuery();
-            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
-            if (databaseQuery->next())
-            {
-                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
-            }//end if (databaseQuery->next())
-        }//end else (if (!checked))
+                qDebug() << databaseQuery->lastError().text();
+        }//end if (!productError)
     }//end try
     catch (QSqlError error)
     {
@@ -219,37 +239,45 @@ bool MainWindow::createCustomer(QString name, QString phoneNumber, QString email
     return uniqueName;
 }
 
-bool MainWindow::editCustomer(QString oldName, QString name, QString phoneNumber, QString email, QString business, bool keyCustomer, interestLevel interest)
+bool MainWindow::editCustomer(QString oldName, QString name, QString address, QString email, QString business, bool keyCustomer, interestLevel interest)
 {
     bool uniqueName = true; //A boolean value the keeps of whether or not the name was unique
 
-    databaseQuery->prepare("UPDATE customerList SET name=?, phoneNumber=?, email=?, business=?, keyCustomer=?, interestLevel=? WHERE name=?");
+    databaseQuery->prepare("UPDATE customerList SET name=?, address=?, email=?, business=?, keyCustomer=?, interestLevel=? WHERE name=?");
 
     if (name == "Not Given")
     {
-        databaseQuery->addBindValue(QVariant(QVariant::String));
+        databaseQuery->bindValue(0, QVariant(QVariant::String));
     }
     else
     {
-        databaseQuery->addBindValue(name);
+        databaseQuery->bindValue(0, name);
     }
-    databaseQuery->addBindValue(phoneNumber);
-    databaseQuery->addBindValue(email);
-    databaseQuery->addBindValue(business);
-    databaseQuery->addBindValue(keyCustomer);
+    databaseQuery->bindValue(1, address);
+    databaseQuery->bindValue(2, email);
+    databaseQuery->bindValue(3, business);
+
+    if (keyCustomer)
+    {
+        databaseQuery->bindValue(4, "Key");
+    }
+    else
+    {
+        databaseQuery->bindValue(4, "Nice to Have");
+    }
 
     qDebug() << interest;
     switch (interest)
     {
-    case NO_INTEREST       : databaseQuery->addBindValue("No Interest");
+    case NO_INTEREST       : databaseQuery->bindValue(5, "No Interest");
                              break;
-    case LOW_INTEREST      : databaseQuery->addBindValue("Low Interest");
+    case LOW_INTEREST      : databaseQuery->bindValue(5, "Low Interest");
                              break;
-    case MODERATE_INTEREST : databaseQuery->addBindValue("Moderate Interest");
+    case MODERATE_INTEREST : databaseQuery->bindValue(5, "Moderate Interest");
                              break;
-    case HIGH_INTEREST     : databaseQuery->addBindValue("High Interest");
+    case HIGH_INTEREST     : databaseQuery->bindValue(5, "High Interest");
                              break;
-    case EXTREMELY_HIGH_INTEREST : databaseQuery->addBindValue("Extremely High Interest");
+    case EXTREMELY_HIGH_INTEREST : databaseQuery->bindValue(5, "Extremely High Interest");
                                    break;
 
     }
@@ -265,15 +293,20 @@ bool MainWindow::editCustomer(QString oldName, QString name, QString phoneNumber
 
             throw databaseQuery->lastError();
         }//end if (!check)
-        else
+
+        if (name != oldName)
         {
-            qDebug() << databaseQuery->lastQuery();
-            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
-            if (databaseQuery->next())
+            databaseQuery->prepare("UPDATE productOrders SET customer=?");
+
+            databaseQuery->bindValue(0, name);
+
+            bool updateProductError = databaseQuery->exec();
+
+            if (!updateProductError)
             {
-                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
-            }//end if (databaseQuery->next())
-        }//end else (if (!checked))
+                qDebug() << databaseQuery->lastError().text();
+            }//end if (!updateProductError)
+        }//end if (name != oldName)
     }//end try
     catch (QSqlError error)
     {
@@ -344,9 +377,15 @@ void MainWindow::printDatabase(QString text, const int NUM_COLUMNS) const
 
         for (int index = 0; index < NUM_COLUMNS; index++)
         {
+            if (index % 7 == 0 && index != 0)
+            {
+                text.append("\n");
+
+                text.append(QString(" ").rightJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+            }
             text.append(databaseQuery->value(index).toString().leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
         }//end for (int index = 0; index < databaseQuery->size(); index++)
-         text = text + '\n';
+         text.append("\n\n");
      }//end while (databaseQuery->next())
 
      if (empty)
@@ -371,7 +410,7 @@ void MainWindow::on_printByNameButton_clicked()
     bool retrievalSuccessful; //A boolean value to check if the query succeeded
     QString text;             //The QString that is displayed on the text edit
 
-    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList ORDEREDBY name");
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList ORDER BY name");
 
     if (!retrievalSuccessful)
     {
@@ -410,59 +449,264 @@ void MainWindow::searchDatabaseResult(QSqlQuery customerFound)
     lastCustomerSearched = customerFound;
 }
 
+void MainWindow::searchDatabaseCancel()
+{
+    searchDatabaseCancelled = true;
+}
 
 void MainWindow::on_deleteCustomerButton_clicked()
 {
     searchDatabasePrompt();
 
-    deleteConfirmation deleteCustomer(lastCustomerSearched);
+    if (!searchDatabaseCancelled)
+    {
+        deleteConfirmation deleteCustomer(lastCustomerSearched);
 
-    deleteCustomer.setModal(true);
+        deleteCustomer.setModal(true);
 
-    deleteCustomer.exec();
+        deleteCustomer.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
 
 void MainWindow::on_editDatabaseButton_clicked()
 {
     searchDatabasePrompt();
 
-    QString tempName        = lastCustomerSearched.value(0).toString(); //The current name of the customer that is being edited
-    QString tempPhoneNumber = lastCustomerSearched.value(1).toString(); //The current phone number of the customer that is being edited
-    QString tempEmail       = lastCustomerSearched.value(2).toString(); //The current email of the customer that is being edited
-    QString tempBusiness    = lastCustomerSearched.value(3).toString(); //The current business of the customer that is being edited
-    bool    tempKeyCustomer = lastCustomerSearched.value(4).toBool();   //A boolean that is true if the customer currently being edited is
-                                                                        //currently a key customer and false otherwise
-    QString interestString  = lastCustomerSearched.value(5).toString(); //A int value represent the current interest level of the customer
-                                                                        //being edited
-
-    interestLevel tempInterest; //The current interest level of the customer that is being edited
-
-    if (interestString == "N0 Interest")
+    if (!searchDatabaseCancelled)
     {
-        tempInterest = NO_INTEREST;
-    }
-    else if (interestString == "Low Interest")
+        QString tempName          = lastCustomerSearched.value(0).toString(); //The current name of the customer that is being edited
+        QString tempPhoneNumber   = lastCustomerSearched.value(1).toString(); //The current phone number of the customer that is being edited
+        QString tempEmail         = lastCustomerSearched.value(2).toString(); //The current email of the customer that is being edited
+        QString tempBusiness      = lastCustomerSearched.value(3).toString(); //The current business of the customer that is being edited
+        QString keyCustomerString = lastCustomerSearched.value(4).toString(); //Whether or not the customer is a key customer
+        QString interestString    = lastCustomerSearched.value(5).toString(); //A int value represent the current interest level of the customer
+                                                                              //being edited
+
+        bool tempKeyCustomer; //A bool value that true if the customer is a key customer and false otherwise
+
+        interestLevel tempInterest; //The current interest level of the customer that is being edited
+
+        if (keyCustomerString == "Key")
+        {
+            tempKeyCustomer = true;
+        }
+        else
+        {
+            tempKeyCustomer = false;
+        }
+
+        if (interestString == "No Interest")
+        {
+            tempInterest = NO_INTEREST;
+        }
+        else if (interestString == "Low Interest")
+        {
+            tempInterest = LOW_INTEREST;
+        }
+        else if (interestString == "Moderate Interest")
+        {
+            tempInterest = MODERATE_INTEREST;
+        }
+        else if (interestString == "High Interest")
+        {
+            tempInterest = HIGH_INTEREST;
+        }
+        else if (interestString == "Extremely High Interest")
+        {
+            tempInterest = EXTREMELY_HIGH_INTEREST;
+        }
+
+        addCustomer editCustomerPrompt(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterest, this);
+
+        editCustomerPrompt.setModal(true);
+
+        editCustomerPrompt.exec();
+    }//end if (!searchDatabaseCancelled)
+    else
     {
-        tempInterest = LOW_INTEREST;
-    }
-    else if (interestString == "Low Interest")
+        searchDatabaseCancelled = false;
+    }//end else (if (!searchDatabaseCancelled))
+}
+
+void MainWindow::on_buyBasicButton_clicked()
+{
+    searchDatabasePrompt();
+
+    if (!searchDatabaseCancelled)
     {
-        tempInterest = MODERATE_INTEREST;
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), BASIC, this);
+
+        confirm.setModal(true);
+
+        confirm.exec();
     }
-    else if (interestString == "Low Interest")
+    else
     {
-        tempInterest = HIGH_INTEREST;
+        searchDatabaseCancelled = false;
     }
-    else if (interestString == "Low Interest")
+}
+
+void MainWindow::buyProduct(QString name, product purchase)
+{
+    QString purchaseQuery; //A the query being written to record the purchase
+    QString productString; //A string that stores the product the customer in buying
+
+    switch (purchase)
     {
-        tempInterest = EXTREMELY_HIGH_INTEREST;
+    case BASIC: productString = "basic";
+        break;
+    case UPGRADE: productString = "upgrade";
+        break;
+    case DELUXE: productString = "deluxe";
+        break;
+    case IROBOT: productString = "robot";
+        break;
     }
 
-    addCustomer editCustomerPrompt(tempName, tempPhoneNumber, tempEmail, tempBusiness, tempKeyCustomer, tempInterest, this);
+    purchaseQuery = "UPDATE productOrders SET " + productString + "=(" + productString + " + 1) WHERE customer='" + name + "'";
+    bool buyProductError = databaseQuery->exec(purchaseQuery);
 
-    editCustomerPrompt.setModal(true);
+    if (!buyProductError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+    }
+}
 
-    editCustomerPrompt.exec();
+void MainWindow::on_pushButton_2_clicked()
+{
+
+}
+
+void MainWindow::on_buyUpgradeButton_clicked()
+{
+    searchDatabasePrompt();
+
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), UPGRADE, this);
+
+        confirm.setModal(true);
+
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
+}
+
+void MainWindow::on_buyDeluxeButton_clicked()
+{
+    searchDatabasePrompt();
+
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), DELUXE, this);
+
+        confirm.setModal(true);
+
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
+}
+
+void MainWindow::on_buyIRobotButton_clicked()
+{
+    searchDatabasePrompt();
+
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), IROBOT, this);
+
+        confirm.setModal(true);
+
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
+}
+
+void MainWindow::on_printKeyByNameButton_clicked()
+{
+    //constant
+    const int NUM_COLUMNS = 7;  //The number of columns in the database
+
+    //variables
+    bool retrievalSuccessful; //A boolean value to check if the query succeeded
+    QString text;             //The QString that is displayed on the text edit
+
+    retrievalSuccessful = databaseQuery->exec("SELECT * FROM customerList WHERE keyCustomer=1 ORDER BY name");
+
+    if (!retrievalSuccessful)
+    {
+         qDebug() << "yep" << endl;
+         QSqlError error = databaseQuery->lastError();
+
+         qDebug() << error.text() << endl;
+
+         throw error;
+    }
+
+    text = "Name";
+    text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+    text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+
+    printDatabase(text, NUM_COLUMNS);
+}
+
+void MainWindow::on_printProductPurchasesButton_clicked()
+{
+    //constant
+    const int NUM_COLUMNS = 12;  //The number of columns in the database
+
+    //variables
+    bool retrievalSuccessful; //A boolean value to check if the query succeeded
+    QString text;             //The QString that is displayed on the text edit
+
+    retrievalSuccessful = databaseQuery->exec("SELECT name, phoneNumber, email, business, keyCustomer, interestLevel, pamphletWanted, basic, upgrade, deluxe, robot, ((200*basic) + (500*upgrade) + (1000*deluxe) + (10000*robot)) FROM customerList INNER JOIN productOrders ON customerList.name=productOrders.customer ORDER BY customerList.name");
+
+    if (!retrievalSuccessful)
+    {
+         QSqlError error = databaseQuery->lastError();
+
+         qDebug() << error.text();
+
+         throw error;
+    }
+
+    text = "Name";
+    text = text.leftJustified(DATA_WIDTH, QChar(' '), true) + ' ';
+    text.append(QString("Phone Number").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Email").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Business").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Key Customer").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Interest Level").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Want Pamphlet?").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+    text.append(QString("Second Level:").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Basic Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Upgrade Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Deluxe Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("IRobot Purchase").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append(QString("Total Cost").leftJustified(DATA_WIDTH, QChar(' '), true) + ' ');
+    text.append('\n');
+
+    printDatabase(text, NUM_COLUMNS);
 }
 
 bool MainWindow::RequestPamphletCopy(QSqlQuery *databaseQuery, QString name)

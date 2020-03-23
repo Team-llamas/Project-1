@@ -918,16 +918,16 @@ p, li { white-space: pre-wrap; }
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_5">
+          <widget class="QPushButton" name="printKeyByNameButton">
            <property name="text">
-            <string>PushButton</string>
+            <string>Print Key Sort by Name</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButton_3">
+          <widget class="QPushButton" name="printProductPurchasesButton">
            <property name="text">
-            <string>PushButton</string>
+            <string>Print Product Purchases</string>
            </property>
           </widget>
          </item>
@@ -948,7 +948,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>20</y>
+        <y>0</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -966,7 +966,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>60</y>
+        <y>40</y>
         <width>241</width>
         <height>221</height>
        </rect>
@@ -990,7 +990,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>60</y>
+        <y>40</y>
         <width>231</width>
         <height>221</height>
        </rect>
@@ -1014,7 +1014,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>580</x>
-        <y>60</y>
+        <y>40</y>
         <width>241</width>
         <height>221</height>
        </rect>
@@ -1038,7 +1038,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>20</y>
+        <y>0</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -1056,7 +1056,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>580</x>
-        <y>20</y>
+        <y>0</y>
         <width>131</width>
         <height>31</height>
        </rect>
@@ -1074,7 +1074,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>580</x>
-        <y>290</y>
+        <y>270</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1093,7 +1093,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>290</y>
+        <y>270</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1112,7 +1112,7 @@ p, li { white-space: pre-wrap; }
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>290</y>
+        <y>270</y>
         <width>256</width>
         <height>192</height>
        </rect>
@@ -1126,6 +1126,72 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt;-Humanoid form for ease of use and disguise&lt;/span&gt;&lt;/p&gt;
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-family:'MS Shell Dlg 2'; font-size:12pt;&quot;&gt;-Touchscreen which provides instant feedback for on site usage&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>470</y>
+        <width>761</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QPushButton" name="buyBasicButton">
+         <property name="text">
+          <string>Buy Basic</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buyUpgradeButton">
+         <property name="text">
+          <string>Buy Upgrade</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="horizontalSpacer_2">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buyDeluxeButton">
+         <property name="text">
+          <string>Buy Deluxe</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="buyIRobotButton">
+         <property name="text">
+          <string>Buy IRobot</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="indemnityPage">
@@ -1167,19 +1233,6 @@ p, li { white-space: pre-wrap; }
       </property>
      </widget>
     </widget>
-   </widget>
-   <widget class="QPushButton" name="EnvironmentButton">
-    <property name="geometry">
-     <rect>
-      <x>480</x>
-      <y>10</y>
-      <width>113</width>
-      <height>32</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Environment</string>
-    </property>
    </widget>
    <widget class="QLabel" name="bannerPic_2">
     <property name="geometry">
@@ -1238,18 +1291,134 @@ p, li { white-space: pre-wrap; }
 &lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Testimonial - Customer reviews on the robot&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="administrator">
+   <widget class="QPushButton" name="indemnity">
     <property name="geometry">
      <rect>
-      <x>600</x>
-      <y>10</y>
-      <width>113</width>
-      <height>32</height>
+      <x>20</x>
+      <y>860</y>
+      <width>161</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Administrator</string>
+     <string>Indemnity Disclaimer</string>
     </property>
+   </widget>
+   <widget class="QPushButton" name="buyNow">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>860</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Buy Now!</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>900</y>
+      <width>551</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="contactUsLayout">
+     <item>
+      <widget class="QLabel" name="contactUsPrompt">
+       <property name="text">
+        <string>If you need any more help, please contact us at:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="contactInfoLayout">
+       <item>
+        <widget class="QLabel" name="emailLabel">
+         <property name="text">
+          <string>CS1C@gmail.com</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="phoneNumberLabel">
+         <property name="text">
+          <string>909-500-0730</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>0</y>
+      <width>721</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_4">
+     <item>
+      <widget class="QPushButton" name="home">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="inputMethodHints">
+        <set>Qt::ImhNone</set>
+       </property>
+       <property name="text">
+        <string>Home</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="capability">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Capability</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="maint">
+       <property name="text">
+        <string>Maintanence</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="testimonial">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="text">
+        <string>Testimonial</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="EnvironmentButton">
+       <property name="text">
+        <string>Environment</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="administrator">
+       <property name="text">
+        <string>Administrator</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
