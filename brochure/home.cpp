@@ -62,14 +62,61 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::MainWindow(const MainWindow& otherWindow)
            :QMainWindow(otherWindow.parentPointer)
+           , ui(new Ui::MainWindow)
 {
+    qDebug() << "made it in copy constructor" << endl;
+
     *ui = *(otherWindow.ui);
+
+    ui->setupUi(this);
 
     *databaseQuery = *databaseQuery;
 
     searchDatabaseCancelled = false;
 
     database = otherWindow.database;
+
+    qDebug() << "test";
+
+    ui->Window->setCurrentIndex(0);
+    qDebug() << "test0.5";
+    database = QSqlDatabase::addDatabase("QSQLITE");
+
+    qDebug() << "test2";
+
+    database.setDatabaseName("database.db");
+
+    qDebug() << database.databaseName() << " " << database.connectionName() << endl;
+
+    if (!database.open())
+    {
+        throw database.lastError();
+    }
+
+    databaseQuery = new QSqlQuery;
+
+    bool createMainTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS customerList (name TEXT PRIMARY KEY NOT NULL, address TEXT, email TEXT, business TEXT, keyCustomer TEXT, interestLevel TEXT, pamphletWanted TEXT)");
+
+    if (!createMainTableError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+
+        throw databaseQuery->lastError();
+    }
+
+     ui->PamphletCopy->setHidden(false);
+
+    bool createProductTableError = databaseQuery->exec("CREATE TABLE IF NOT EXISTS productOrders (customer TEXT, basic INT, upgrade INT, deluxe INT, robot INT)");
+
+    if (!createProductTableError)
+    {
+        qDebug() << databaseQuery->lastError().text();
+
+        throw databaseQuery->lastError();
+    }
+
+
+    ui->RepeatRequest->setVisible(false);
 }
 
 MainWindow::~MainWindow()
