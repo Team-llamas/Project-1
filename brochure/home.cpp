@@ -534,11 +534,18 @@ void MainWindow::on_buyBasicButton_clicked()
 {
     searchDatabasePrompt();
 
-    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), BASIC, this);
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), BASIC, this);
 
-    confirm.setModal(true);
+        confirm.setModal(true);
 
-    confirm.exec();
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
 
 void MainWindow::buyProduct(QString name, product purchase)
@@ -576,33 +583,54 @@ void MainWindow::on_buyUpgradeButton_clicked()
 {
     searchDatabasePrompt();
 
-    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), UPGRADE, this);
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), UPGRADE, this);
 
-    confirm.setModal(true);
+        confirm.setModal(true);
 
-    confirm.exec();
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
 
 void MainWindow::on_buyDeluxeButton_clicked()
 {
     searchDatabasePrompt();
 
-    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), DELUXE, this);
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), DELUXE, this);
 
-    confirm.setModal(true);
+        confirm.setModal(true);
 
-    confirm.exec();
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
 
 void MainWindow::on_buyIRobotButton_clicked()
 {
     searchDatabasePrompt();
 
-    purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), IROBOT, this);
+    if (!searchDatabaseCancelled)
+    {
+        purchaseConfirmation confirm(lastCustomerSearched.value(0).toString(), IROBOT, this);
 
-    confirm.setModal(true);
+        confirm.setModal(true);
 
-    confirm.exec();
+        confirm.exec();
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
 
 void MainWindow::on_printKeyByNameButton_clicked()
