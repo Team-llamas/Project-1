@@ -38,6 +38,12 @@ MainWindow::MainWindow(QWidget *parent)
     {
         qDebug() << databaseQuery->lastError().text();
     }
+
+
+    searchDatabaseResult(lastCustomerSearched);
+
+     ui->PamphletCopy->setHidden(false);
+
 }
 
 MainWindow::~MainWindow()
@@ -457,4 +463,48 @@ void MainWindow::on_editDatabaseButton_clicked()
     editCustomerPrompt.setModal(true);
 
     editCustomerPrompt.exec();
+}
+
+bool MainWindow::RequestPamphletCopy(QSqlQuery *databaseQuery, QString name)
+{
+   bool onList = true;
+
+   databaseQuery->prepare("UPDATE customerList SET name=?");
+
+    if(name == "Yes")
+    {
+        databaseQuery->bindValue(6, QVariant(QVariant::String));
+    }
+    else
+    {
+        databaseQuery->bindValue(6, name);
+    }
+
+    databaseQuery->bindValue(6, "Yes");
+
+    if(onList)
+    {
+        ui->Window->setCurrentIndex(0);
+    }
+    else
+    {
+        qDebug() << "Customer not found. Please enter name in administrator database." << endl;
+
+        QSqlError error = databaseQuery->lastError();
+
+        qDebug() << error.text() << endl;
+
+        throw error;
+    }
+
+    return onList;
+}
+
+
+
+void MainWindow::on_PamphletCopy_clicked()
+{
+    QPushButton PamphletCopy;
+
+    searchDatabasePrompt();
 }
