@@ -104,13 +104,13 @@
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>330</y>
+      <y>260</y>
       <width>841</width>
-      <height>601</height>
+      <height>671</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="mainPage">
      <widget class="QLabel" name="header">
