@@ -116,7 +116,6 @@ public:
     void searchDatabaseResult(QSqlQuery customerFound);
 
     bool RequestPamphletCopy(QSqlQuery *databaseQuery, QString name);
-
     /** fn
      * searchDatabaseCancel
      *      This function tells MainWindow that a database search was cancelled.
@@ -149,6 +148,7 @@ public:
      *      purchase in order the show that the customer has made this purchase.
      */
     void buyProduct(QString name, product purchase);
+
 private slots:
 
     /** fn
@@ -311,6 +311,9 @@ private slots:
 
     void on_PamphletCopy_clicked();
 
+private:
+
+
     /** fn
      * on_capability_clicked
      *      This is the slot that is executed when the capability button is clicked
@@ -318,6 +321,7 @@ private slots:
      * Postcondition:
      *      The user is taken to the capability page
      */
+
     void on_buyBasicButton_clicked();
 
     /** fn

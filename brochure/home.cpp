@@ -53,6 +53,10 @@ MainWindow::MainWindow(QWidget *parent)
         throw databaseQuery->lastError();
     }
 
+    searchDatabaseResult(lastCustomerSearched);
+
+     ui->PamphletCopy->setHidden(false);
+
     searchDatabaseCancelled = false;
 }
 
@@ -709,66 +713,6 @@ void MainWindow::on_printProductPurchasesButton_clicked()
     printDatabase(text, NUM_COLUMNS);
 }
 
-bool MainWindow::RequestPamphletCopy(QSqlQuery *databaseQuery, QString name)
-{
-   bool onList = true;
-
-   databaseQuery->prepare("UPDATE customerList SET name=?");
-
-    if(name == "Yes")
-    {
-        databaseQuery->bindValue(6, QVariant(QVariant::String));
-    }
-    else
-    {
-        databaseQuery->bindValue(6, name);
-    }
-
-    databaseQuery->bindValue(6, "Yes");
-
-    if(onList)
-    {
-        ui->Window->setCurrentIndex(0);
-    }
-    else
-    {
-        qDebug() << "Customer not found. Please enter name in administrator database." << endl;
-    }
-
-    try
-    {
-        bool check = databaseQuery->exec();
-        if (!check)
-        {
-            qDebug() << databaseQuery->lastError().text();
-
-            throw databaseQuery->lastError();
-        }//end if (!check)
-        else
-        {
-            qDebug() << databaseQuery->lastQuery();
-            databaseQuery->exec("SELECT * FROM customerList WHERE name=" + name);
-            if (databaseQuery->next())
-            {
-                qDebug() << "The customer named " << databaseQuery->value(0) << " has successfully been added";
-            }//end if (databaseQuery->next())
-        }//end else (if (!checked))
-    }//end try
-
-    catch(QSqlError error)
-    {
-        if(error.text() == "UNIQUE constraint failed: customerList.name Unable to fetch row" || error.text() == "NOT NULL constraint failed: customerList.name Unable to fetch row")
-        {
-            onList = false;
-        }
-        else
-        {
-            throw error;
-        }
-    }
-
-    return onList;
-}
 
 
 
@@ -776,5 +720,54 @@ void MainWindow::on_PamphletCopy_clicked()
 {
     QPushButton PamphletCopy;
 
+    QString name;
+
+    bool copySuccessful;
+
     searchDatabasePrompt();
+
+    lastCustomerSearched.value(6).toString();
+
+    if(!searchDatabaseCancelled)
+    {
+
+        if(lastCustomerSearched.value(6).toString() == "No")
+        {
+            databaseQuery->prepare("UPDATE customerList SET PamphletWanted = 'Yes' WHERE name=?");
+            databaseQuery->bindValue(name, lastCustomerSearched.value(0).toString());
+            copySuccessful = databaseQuery->exec();
+
+            if (!copySuccessful)
+            {
+                qDebug() << databaseQuery->lastError().text();
+            }
+
+        }
+        else
+        {
+
+        }
+
+         if(name == "Yes")
+         {
+
+         }
+         else
+         {
+             databaseQuery->bindValue(6, name);
+         }
+
+
+
+         databaseQuery->bindValue(6, "Yes");
+
+
+    }
+    else
+    {
+        searchDatabaseCancelled = false;
+    }
 }
+
+
+
