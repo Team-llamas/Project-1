@@ -117,6 +117,8 @@ MainWindow::MainWindow(const MainWindow& otherWindow)
 
 
     ui->RepeatRequest->setVisible(false);
+
+    ui->BrochureOverview->setHidden(true);
 }
 
 MainWindow::~MainWindow()
